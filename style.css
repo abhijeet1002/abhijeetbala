@@ -1,0 +1,86 @@
+body {
+    padding: 0px;
+    margin: 0px;
+   
+   
+}
+.mainnavi { 
+    background-color:;
+    width: 300PX;
+    height: 300PX;
+    align-items: center;
+    box-shadow: 10px 0px 25px black;
+    position: fixed;
+
+}
+.mainnavi h1{ 
+    text-align: center;
+    
+ }
+ .mainnavi h4{ 
+    text-align: center;  
+       
+ }
+ 
+.mainnavi img { 
+    width: 280PX;
+    height: 280PX;
+    padding: 9px;
+}
+
+#slogo {
+
+
+}
+.sociallogo  {
+    width: 300px;    
+}
+.table1  {
+ 
+    text-shadow: 10px 10px 25px black;
+    text-align: center;
+}
+.table2  {
+    
+    text-shadow: 10px 10px 25px black;
+    text-align: center;
+}
+#tableimg1  {
+  margin-left: 30%;
+}
+#tableimg2  {
+    margin-right: 30%;
+  }
+.sociallogo img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+
+
+}
+.sociallogo img:hover {
+    transition-delay: 2ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin-top: -5px;
+    box-shadow: 10px 10px 25px black;    
+}
+.container {
+    padding: 20px;
+    margin: 0px 0px 0px 320px;
+    border: 1px solid black;
+    box-shadow: -10px -10px 25px gray;
+    background-color: white;
+
+
+    
+}
+.container p {
+    
+}
+h1 {
+    color: lightslategray;
+    text-shadow: 20px 20px 30px black;
+}
+#name h1{
+    color: black;
+}

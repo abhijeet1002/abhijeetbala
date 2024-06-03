@@ -1,0 +1,126 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Gill Sans Extrabold", sans-serif;
+    background-color: #f1f3f5;
+    background-image: linear-gradient(283deg, #f1f3f5 0%, #7a91ac 50%, #ffffff 100%);
+    }
+.mainnavi { 
+    background-color:;
+    width: 300PX;
+    height: 300PX;
+    align-items: center;
+    box-shadow: 10px 0px 25px black;
+    position: fixed;
+   
+
+}
+.mainnavi h1{ 
+    text-align: center;
+    
+ }
+ .mainnavi h4{ 
+    text-align: center;  
+       
+ }
+ 
+.mainnavi img { 
+    width: 280PX;
+    height: 280PX;
+    padding: 9px;
+}
+
+#slogo {
+
+
+}
+.sociallogo  {
+    width: 300px;    
+}
+.table1  {
+ 
+    text-shadow: 10px 10px 25px black;
+    text-align: center;
+}
+.table2  {
+    
+    text-shadow: 10px 10px 25px black;
+    text-align: center;
+}
+#tableimg1  {
+  margin-left: 30%;
+}
+#tableimg2  {
+    margin-right: 30%;
+  }
+.sociallogo img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+
+
+}
+.sociallogo img:hover {
+    transition-delay: 2ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin-top: -5px;
+    box-shadow: 10px 10px 25px black;    
+}
+.container {
+    padding: 50px;
+    margin: 0px 0px 0px 320px;
+    text-align: left;
+}
+.container h1 {
+    font-family: sans-serif;
+
+}
+.more button {
+  
+  float: right;
+  margin-right: 200px;
+  border: 1px solid black;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  border: 0px;
+  background-color:black;
+  color: #ffffff;
+  border-radius: 30%;
+  box-shadow: -10px -10px 5px lightslategray;
+  
+
+
+  
+}
+.more button a {
+  
+    color: #ffffff;
+       
+  }
+button {
+    a:link {
+        text-decoration: #ffffff;
+    }
+    a:visited {
+        text-decoration: white;
+    }
+    a:hover {
+        text-decoration: red;
+    }
+    a:active {
+        text-decoration: underline greenyellow;
+    }
+   
+}
+.more button:hover {
+  
+   box-shadow: 10px 10px 25px green;  
+   margin-top: -5px;  
+   width: 50px;
+   height:;
+  }
+  #name h1{
+    color: black;
+}
