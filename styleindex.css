@@ -72,57 +72,94 @@ border-radius: 50%;
     padding: 50px;
     margin: 0px 0px 0px 320px;
     text-align: left;
+    background-color: ;
 }
 .container h1 {
     font-family: sans-serif;
 
 }
-.more button {
-  
-  float: right;
-  margin-right: 200px;
-  border: 1px solid black;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  font-style: normal;
-  border: 0px;
-  background-color:black;
-  color: #ffffff;
-  border-radius: 30%;
-  box-shadow: -10px -10px 5px lightslategray;
-  
+.frontbutton {
+      align-items: center;
+      appearance: none;
+      background-color: #FCFCFD;
+      border-radius: 4px;
+      border-width: 0;
+      box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+      box-sizing: border-box;
+      color: #36395A;
+      cursor: pointer;
+      display: inline-flex;
+      font-family: "JetBrains Mono",monospace;
+      height: 25px;
+      justify-content: center;
+      line-height: 1;
+      list-style: none;
+      overflow: hidden;
+      padding-left: 16px;
+      padding-right: 16px;
+      position: relative;
+      text-align: left;
+      text-decoration: none;
+      transition: box-shadow .15s,transform .15s;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+      will-change: box-shadow,transform;
+      font-size: 18px;
+    }
+    
+    .frontbutton:focus {
+      box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    }
+    
+    .frontbutton:hover {
+      box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+      transform: translateY(-2px);
+    }
+    
+    .frontbutton:active {
+      box-shadow: #D6D6E7 0 3px 7px inset;
+      transform: translateY(2px);
+    }
 
-
-  
-}
-.more button a {
-  
-    color: #ffffff;
-       
-  }
-button {
-    a:link {
-        text-decoration: #ffffff;
-    }
-    a:visited {
-        text-decoration: white;
-    }
-    a:hover {
-        text-decoration: red;
-    }
-    a:active {
-        text-decoration: underline greenyellow;
+    .frontbutton a {
+        text-decoration: none;
+        color: black;
     }
    
+}/*
+.more {
+    border: none;
+    background-color:none ;
+    padding: 2px;
+    border-radius: 30%;
+    box-shadow:inset 0 -3em 3em rgb(100 100 100 / 0%), 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);
+
 }
-.more button:hover {
-  
-   box-shadow: 10px 10px 25px green;  
-   margin-top: -5px;  
-   width: 50px;
-   height:;
-  }
-  #name h1{
-    color: black;
+.more:hover {
+    transition-delay: 2ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin-top: -5px;
+    box-shadow: inset 0 0 10px gray, 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);
+    border-radius: 0%;
+    font-size: 15px;
+
+}
+.more1 {
+    margin-left: 30px;
+    background-color:none ;
+    padding: 2px;
+    border-radius: 30%;
+    box-shadow:inset 0 -3em 3em rgb(100 100 100 / 0%), 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);
+    border: none;
+}
+.more1:hover {
+    transition-delay: 2ms;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin-top: -5px;
+    box-shadow: inset 0 0 10px gray, 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);
+    border-radius: 0%;
+    font-size: 15px;
+
 }
