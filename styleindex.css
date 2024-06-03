@@ -4,6 +4,8 @@ body {
     font-family: "Gill Sans Extrabold", sans-serif;
     background-color: #f1f3f5;
     background-image: linear-gradient(283deg, #f1f3f5 0%, #7a91ac 50%, #ffffff 100%);
+    background-repeat: no-repeat;
+    background-position: center;
     }
 .mainnavi { 
     background-color:;
