@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background: radial-gradient(circle at top, #0f172a, #020617 60%, #000);
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* ===== BACKGROUND GLOW ===== */
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    filter:blur(180px);
+    z-index:-1;
+}
+
+body::before{
+    background:#00c3ff40;
+    top:-120px;
+    left:-120px;
+}
+
+body::after{
+    background:#00ffcc30;
+    bottom:-120px;
+    right:-120px;
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.mainnavi{
+    position:fixed;
+    top:0;
+    left:0;
+    width:300px;
+    height:100vh;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(25px);
+
+    border-right:1px solid rgba(255,255,255,0.1);
+
+    text-align:center;
+    padding:25px;
+
+    box-shadow: 10px 0 40px rgba(0,0,0,0.6);
+}
+
+/* PROFILE IMAGE */
+.mainnavi a img{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    object-fit:cover;
+
+    border:4px solid #00d4ff;
+    box-shadow:0 0 30px #00d4ff;
+
+    transition:0.4s ease;
+}
+
+.mainnavi a img:hover{
+    transform:scale(1.08) rotate(3deg);
+    box-shadow:0 0 70px cyan;
+}
+
+/* NAME */
+#name h1{
+    margin-top:15px;
+    font-size:24px;
+    letter-spacing:2px;
+    color:#fff;
+    text-shadow:0 0 10px rgba(0,195,255,0.6);
+}
+
+.mainnavi h4{
+    margin-top:5px;
+    color:#8ecfff;
+    font-weight:400;
+}
+
+/* ===== SOCIAL ICONS FIX ===== */
+.sociallogo{
+    margin-top:25px;
+}
+
+.sociallogo table{
+    width:100%;
+    text-align:center;
+}
+
+.sociallogo img{
+    width:38px !important;
+    height:38px !important;
+    border-radius:50%;
+    object-fit:cover;
+    transition:0.3s ease;
+}
+
+.sociallogo img:hover{
+    transform:translateY(-6px) scale(1.15);
+    box-shadow:0 0 15px cyan;
+}
+
+/* spacing fix */
+#tableimg1{ margin-left:10%; }
+#tableimg2{ margin-right:10%; }
+
+/* ===== MAIN CONTENT (LIGHT GLASS BOX) ===== */
+.container{
+    margin-left:300px;
+    padding:60px;
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+
+    /* ⭐ LIGHT PREMIUM GLASS */
+    background: rgba(255,255,255,0.09);
+
+    backdrop-filter: blur(20px);
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.4),
+        inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+/* TEXT */
+.container p{
+    text-align:center;
+    font-size:18px;
+    line-height:32px;
+    color:#e5e7eb;
+}
+
+/* MAIN IMAGE */
+.container p img{
+    width:520px;
+    max-width:100%;
+    border-radius:20px;
+
+    box-shadow:0 0 35px rgba(0,195,255,0.3);
+
+    transition:0.4s ease;
+}
+
+.container p img:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 70px cyan;
+}
+
+/* BUTTONS */
+.frontbutton{
+    margin:10px;
+    padding:14px 34px;
+
+    border:none;
+    border-radius:50px;
+
+    background: linear-gradient(45deg,#00c3ff,#0072ff);
+
+    cursor:pointer;
+    transition:0.3s ease;
+
+    box-shadow:0 0 25px rgba(0,195,255,0.5);
+}
+
+.frontbutton:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 50px cyan;
+}
+
+.frontbutton a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+}
+
+/* CERTIFICATIONS */
+.container div{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.container div img{
+    width:120px;
+    filter:grayscale(100%);
+    transition:0.4s ease;
+}
+
+.container div img:hover{
+    filter:grayscale(0);
+    transform:translateY(-12px) scale(1.1);
+    filter:drop-shadow(0 0 20px cyan);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+
+.mainnavi{
+    position:relative;
+    width:100%;
+    height:auto;
+}
+
+.container{
+    margin-left:0;
+    padding:25px;
+}
+
+.container div img{
+    width:90px;
+}
+
+.container p img{
+    width:100%;
+}
+
+}
