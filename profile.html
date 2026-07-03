@@ -3,287 +3,473 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhijeet Bala</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>Abhijeet Bala - Portfolio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong:400,600,700">
     <style>
+        /* Base Reset & Colors */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: "Trirong", serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+
+        /* Sidebar / Navigation */
+        #mainnav {
+            flex: 1 1 300px;
+            background-color: #1a252f;
+            color: #ffffff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        #mainnav img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid #007acc;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        #mainnav img:hover {
+            transform: scale(1.05);
+        }
+        #name h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        #mainnav h4 {
+            font-size: 14px;
+            color: #007acc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .sociallogo table {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .sociallogo td {
+            padding: 10px;
+            text-align: center;
+        }
+        .sociallogo img {
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: 0 !important;
+            border: none !important;
+            margin-bottom: 0 !important;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .sociallogo img:hover {
+            opacity: 1;
+        }
+
+        /* Main Content Container */
+        .container {
+            flex: 2 1 700px;
+            padding: 40px 50px;
+            background: #ffffff;
+        }
+
+        /* Section Spacing & Stylish Headings */
+        .section {
+            margin-bottom: 45px; /* Fixed space issue between sections */
+        }
+        .section h1 {
+            font-size: 22px;
+            color: #1a252f;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .section h1 img {
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        /* Stylish Line / Gradient Divider */
+        .stylish-line {
+            height: 3px;
+            background: linear-gradient(to right, #007acc, #007acc 20%, rgba(0,122,204,0.1) 90%, transparent);
+            border: none;
+            margin-bottom: 25px;
+            border-radius: 2px;
+        }
+
+        /* Typography & Paragraphs */
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-size: 15px;
+            text-align: justify;
+        }
+        h2 {
+            font-size: 18px;
+            color: #007acc;
+            margin-top: 25px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .meta-info {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        /* Lists Styling */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+            color: #4a5568;
+            font-size: 15px;
+        }
+        li b {
+            color: #1a252f;
+        }
+        ol li {
+            margin-bottom: 5px;
+        }
+
+        /* Data Tables (Education & Personal) */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .data-table th {
+            background-color: #f7fafc;
+            color: #1a252f;
+            text-align: left;
+            padding: 12px;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 14px;
+        }
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #edf2f7;
+            color: #4a5568;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        .data-table tr:hover {
+            background-color: #fcfdfd;
+        }
+
+        /* Contact Details Layout */
+        .contact-table td {
+            padding: 8px 12px 8px 0;
+            font-size: 15px;
+        }
+
+        /* Declaration & Footer */
+        .declaration-text {
+            font-style: italic;
+            color: #4a5568;
+        }
+        .signature {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #1a252f;
+        }
+        .download-area {
+            width: 100%;
+            text-align: center;
+            padding: 30px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        .download-btn {
+            background-color: #007acc;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+        .download-btn a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+        .download-btn:hover {
+            background-color: #005999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .wrapper { flex-direction: column; }
+            #mainnav { flex: 1 1 100%; padding: 30px 20px; }
+            .container { padding: 30px 20px; flex: 1 1 100%; }
         }
     </style>
 </head>
 <body>
-   
-    <div id="mainnav" class="mainnavi">
-        <a href="index.html"><img src="Profile_pic.jpg" alt="Profile Picture"></a>
-        <span id="name"><h1>ABHIJEET BALA</h1></span>
-        <h4>Senior Engineer - IT</h4>
-        
-        <div id="slogo" class="sociallogo">
-            <table class="table1" width="100%">
-                <tr>
-                    <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"><img src="facebook-48.png" alt="facebook"></a></td>
-                    <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"><img src="instagram-48.png" alt="instagram"></a></td>
-                    <td><a href="https://www.linkedin.com/in/1002-abhijeetbala?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="linkedin-48.png" alt="linkedin"></a></td>
-                </tr>
-            </table>
-            <table class="table2" width="100%">
-                <tr>
-                    <td><a href="mailto:recipient@example.com"><img id="tableimg1" src="hotmail-48.png" alt="email"></a></td>
-                    <td><a href="https://wa.me/qr/I4KLRZECN76OD1" target="_blank"><img id="tableimg2" src="whatsapp.png" alt="whatsapp"></a></td>
-                </tr>
-            </table>
+
+    <div class="wrapper">
+        <div id="mainnav">
+            <a href="index.html"><img src="Profile_pic.jpg" alt="Abhijeet Bala"></a>
+            <div id="name"><h1>ABHIJEET BALA</h1></div>
+            <h4>Senior Engineer - IT</h4>
+            
+            <div class="sociallogo">
+                <table>
+                    <tr>
+                        <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"><img src="facebook-48.png" alt="Facebook"></a></td>
+                        <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"><img src="instagram-48.png" alt="Instagram"></a></td>
+                        <td><a href="https://www.linkedin.com/in/1002-abhijeetbala?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="linkedin-48.png" alt="LinkedIn"></a></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td><a href="mailto:abhijeetbala@outlook.com"><img src="hotmail-48.png" alt="Email"></a></td>
+                        <td><a href="https://wa.me/qr/I4KLRZECN76OD1" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="container">
+            
+            <div class="section">
+                <h1>Professional Summary <img src="Profile-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <p>A dedicated Senior IT Engineer with 12+ years of experience in optimizing IT operations and maintaining robust network infrastructures.</p>
+                <ul>
+                    <li><b>Infrastructure & Core IT:</b> Strong expertise in Windows Server (2012/2016) administration, Linux OS setup, and local/remote data services.</li>
+                    <li><b>Networking & Security:</b> Proficient in LAN/WAN setup, router/switch configuration, and Sophos Firewall maintenance.</li>
+                    <li><b>Problem Solving:</b> Experienced in resolving complex system issues, ERP client support (Proximo/SAP), and providing prompt remote technical assistance.</li>
+                    <li><b>Certified Professional:</b> Formally trained and certified in MCITP, CCNA, and CompTIA A+ from NIIT, New Delhi.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h1>Skills <img src="skill-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <ul>
+                    <li><b>Windows Server Management:</b> Proficient in administering and configuring Windows Server 2016 and 2012 R2 environments, managing Active Directory, and supervising critical services like Wind-chill Remote Access and Tally Remote Data Services.</li>
+                    <li><b>Linux System Administration:</b> Extensive hands-on experience in deploying, configuring, and troubleshooting various Linux distributions, including Ubuntu LTS (16.04 to 26.04), Kubuntu, and CentOS.</li>
+                    <li><b>OpenMediaVault (OMV) Deployment:</b> Skilled in setting up OpenMediaVault OS for robust Network-Attached Storage (NAS) solutions, configuring user permissions, storage pools, and implementing automated file-sharing protocols.</li>
+                    <li><b>Intranet Configuration & Maintenance:</b> Expert in designing, building, and maintaining secure enterprise Intranet frameworks to ensure seamless data exchange and stable local network resources.</li>
+                    <li><b>Network Security & Firewalls:</b> Experienced in managing network integrity, implementing advanced security protocols, and configuring/maintaining Sophos Firewalls, routers, and managed network switches.</li>
+                    <li><b>Network Infrastructure Design:</b> Competent in setting up and diagnosing complete LAN, WAN, and WLAN network topologies, managing structured cabling, and expanding network connectivity between corporate HQs and plant units.</li>
+                    <li><b>Web & Graphic Design Foundation:</b> Foundational technical knowledge in web development technologies (HTML, CSS, JavaScript) paired with standard design software suites like Photoshop, CorelDraw, and GIMP.</li>
+                    <li><b>ERP Client & Database Support:</b> Adept at handling client-side configurations, user management, and technical troubleshooting for Proximo ERP (php7.01) and SAP HANA systems.</li>
+                    <li><b>Cross-Platform Troubleshooting:</b> Strong diagnostic skills for resolving complex hardware, peripheral, and OS-level bottlenecks across multiple platforms including Windows and enterprise servers.</li>
+                    <li><b>Virtualization & Remote Storage:</b> Practical experience in managing virtualized environments via VMware infrastructure and managing data synchronization routines using WD Sharing Point tools.</li>
+                    <li><b>Infrastructure Backup & Disaster Recovery:</b> Proficient in designing and executing strict multi-point data backup strategies (both manual and automated) on central servers to ensure high data availability.</li>
+                    <li><b>Communication & Surveillance Systems:</b> Skilled in installing, monitoring, and managing commercial Closed-Circuit Television (CCTV) systems alongside configuring enterprise EPABX/intercom telephone routing networks.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h1>Professional Experience <img src="work-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                
+                <h2>Senior IT Engineer</h2>
+                <div class="meta-info">Emdet Engineers Pvt. Ltd. | Dharuhera, Haryana & Rudrapur, Uttarakhand | March 2018 – Present</div>
+                <p><b>Company Profile Context:</b> Currently managing core IT operations at Emdet Engineers Pvt. Ltd., including infrastructure integration for Syska Miterr Private Limited —a high-tech joint venture between Syska LED Lights, Emdet Engineers, and Miter & Miter Group.</p>
+                <ul>
+                    <li><b>Multi-Site Infrastructure Integration:</b> Orchestrated and maintained seamless data communication and systems integrity between Corporate HQ (Gurugram) and Production Unit-1 (Dharuhera HSIIDC).</li>
+                    <li><b>Enterprise Server Administration:</b> Expertly administered Windows Server 2016 environments, managing critical enterprise services including Wind-chill Remote Access, Tally Remote Data Services, and automated backups.</li>
+                    <li><b>OpenMediaVault (NAS) Implementation:</b> Successfully deployed OpenMediaVault (OMV) OS to establish robust Network-Attached Storage solutions with secure user access policies.</li>
+                    <li><b>Network Security & Firewalls:</b> Maintained high availability of network architecture by configuring and monitoring Sophos Firewalls, enterprise routers, and managed switches.</li>
+                    <li><b>Technical Support Leadership:</b> Delivered top-tier remote and endpoint technical support while managing internal team dynamics and setting strategic productivity goals.</li>
+                </ul>
+                
+                <h2>CCE, DMS Client & Server Support</h2>
+                <div class="meta-info">Agarwal Motors | Rudrapur, Uttarakhand | September 2016 – February 2018</div>
+                <ul>
+                    <li><b>Server & DMS Control:</b> Managed Windows Server 2012 R2 infrastructure running Dealer Management System (DMS), Tally 9, and internal file-sharing networks.</li>
+                    <li><b>Disaster Recovery:</b> Formulated and executed strict manual data backup routines on the central server to protect enterprise records against data loss.</li>
+                    <li><b>IT Procurement & Upgrades:</b> Actively participated in technical procurement workflows, evaluating hardware/software resource requirements.</li>
+                </ul>
+                
+                <h2>Network / Desktop Support Engineer</h2>
+                <div class="meta-info">HCS | New Delhi | May 2012 – January 2016</div>
+                <ul>
+                    <li><b>Infrastructure Redundancy:</b> Served as the primary point of contact for disaster mitigation, providing critical backup systems during live failovers.</li>
+                    <li><b>Network Documentation:</b> Designed, maintained, and logged comprehensive network topology diagrams and infrastructure implementation blueprints.</li>
+                    <li><b>SLA-Bound Support:</b> Delivered high-quality remote and on-site L2 technical support, debugging core OS defects and desktop peripheral issues.</li>
+                </ul>
+
+                <h2>Desktop Support Engineer</h2>
+                <div class="meta-info">Simple Infosystems Pvt. Ltd. | Noida, Uttar Pradesh | August 2011 – April 2012</div>
+                <ul>
+                    <li>Resolved multi-tier client technical inquiries for desktop hardware and client software.</li>
+                    <li>Assisted with computer software deployment, system updates, and logged diagnostic support tokens.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h1>Education <img src="Education-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Examination</th>
+                            <th>Year</th>
+                            <th>School/College</th>
+                            <th>Board/University</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Class X</td>
+                            <td>2004</td>
+                            <td>Janta Inter College, Rudrapur</td>
+                            <td>U.A. Board (Uttarakhand)</td>
+                        </tr>
+                        <tr>
+                            <td>Class XII</td>
+                            <td>2006</td>
+                            <td>Janta Inter College, Rudrapur</td>
+                            <td>U.A. Board (Uttarakhand)</td>
+                        </tr>
+                        <tr>
+                            <td>Bachelor of Commerce</td>
+                            <td>2009</td>
+                            <td>Kumaun University, Nainital</td>
+                            <td>Kumaun University</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h1>Technical Qualification <img src="TECH-LOGO.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <ul>
+                    <li>
+                        <b>Higher Diploma in System and Networking (Global Net+)</b><br>
+                        <span class="meta-info">Institute: NIIT, Connaught Place, New Delhi | Duration: November 2009 – February 2012</span>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <b>MCITP (Microsoft Certified IT Professional)</b> — <span class="meta-info">NIIT, New Delhi</span>
+                        <ol>
+                            <li>Windows 7, Configuration: Enterprise client deployment and desktop security.</li>
+                            <li>Windows Server 2008 Active Directory Configuration: Managing identity infrastructures and domain controllers.</li>
+                            <li>Windows Server 2008 Network Infrastructure: Setting up core network services like DNS, DHCP, and routing.</li>
+                            <li>Server Administrator on Windows Server 2008 R2: Server provisioning and backup management.</li>
+                        </ol>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <b>CCNA (Cisco Certified Network Associate)</b> — <span class="meta-info">NIIT, New Delhi</span>
+                        <ol>
+                            <li>Routing and Switching: Configuring Cisco routers/switches, building VLANs, and secure LAN/WAN protocols.</li>
+                        </ol>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <b>CompTIA A+ (Systems Specialist)</b> — <span class="meta-info">NIIT, New Delhi</span>
+                        <ol>
+                            <li>CompTIA A+ Essentials & Practical Application.</li>
+                        </ol>
+                    </li>
+                    <li style="margin-top: 15px;">
+                        <b>Tally 7.2 & Foundation Computer Applications</b><br>
+                        <span class="meta-info">Institute: Bilingual, Haldwani, Uttarakhand</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h1>Personal Details <img src="personal-details-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <table class="data-table">
+                    <tr>
+                        <td style="width: 30%; font-weight: 600;">Father’s Name</td>
+                        <td style="width: 5%;">=</td>
+                        <td>Mr. Gyanendra Bala</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Date of Birth</td>
+                        <td>=</td>
+                        <td>February 10, 1987</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Sex / Nationality</td>
+                        <td>=</td>
+                        <td>Male / Indian</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Marital Status</td>
+                        <td>=</td>
+                        <td>Married</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600; vertical-align: top;">Languages Known</td>
+                        <td style="vertical-align: top;">=</td>
+                        <td>
+                            English <img src="English.png" alt="" style="height:14px; vertical-align:middle; margin-left:5px;"><br>
+                            Hindi <img src="Hindi.png" alt="" style="height:14px; vertical-align:middle; margin-left:5px;"><br>
+                            Bangla <img src="bangla.png" alt="" style="height:14px; vertical-align:middle; margin-left:5px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h1>Contacts <img src="Contacts-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <table class="contact-table">
+                    <tr>
+                        <td><img src="Mobile-logo.png" height="20px" alt=""></td>
+                        <td><b>+91- 8585-96-8585</b></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Email-logo.png" height="20px" alt=""></td>
+                        <td><b>abhijeetbala@outlook.com</b></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;"><img src="address-logo.png" height="20px" alt=""></td>
+                        <td>House No. - 724, Sanjay Nagar, Ward No. -11, Rudrapur, Udham Singh Nagar, Uttarakhand - 263153, India</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h1>Declaration <img src="Declaration-logo.png" width="24px" height="24px" alt=""></h1>
+                <div class="stylish-line"></div>
+                <p class="declaration-text">All the above information is correct and under my knowledge. I would be responsible for any type of mistake.</p>
+                <span class="signature">- Abhijeet Bala <br><small style="color:#718096;">Rudrapur, Uttarakhand</small></span>
+            </div>
+
+        </div>
+
+        <div class="download-area"> 
+            <button class="download-btn"><a href="profile.html">Download Resume</a></button>
         </div>
     </div>
 
-    <div class="container">
-        <div>
-            <h1>Professional Summary <img src="Profile-logo.png" width="30px" height="30px" alt="Profile Logo"></h1>
-            <hr>
-            <p>A dedicated Senior IT Engineer with 12+ years of experience in optimizing IT operations and maintaining robust network infrastructures.</p>
-            <ul>
-                <li><b>Infrastructure & Core IT:</b> Strong expertise in Windows Server (2012/2016) administration, Linux OS setup, and local/remote data services.</li>
-                <li><b>Networking & Security:</b> Proficient in LAN/WAN setup, router/switch configuration, and Sophos Firewall maintenance.</li>
-                <li><b>Problem Solving:</b> Experienced in resolving complex system issues, ERP client support (Proximo/SAP), and providing prompt remote technical assistance.</li>
-                <li><b>Certified Professional:</b> Formally trained and certified in MCITP, CCNA, and CompTIA A+ from NIIT, New Delhi.</li>
-            </ul>
-        </div>
-        
-        <br>
-         
-        <div>
-            <h1>Skills <img src="skill-logo.png" width="30px" height="30px" alt="Skill Logo"></h1>
-            <hr>
-            <br>
-            <ul>
-                <li><b>Windows Server Management:</b> Proficient in administering and configuring Windows Server 2016 and 2012 R2 environments, managing active directory, and supervising critical services like Wind-chill Remote Access and Tally Remote Data Services.</li>
-                <li><b>Linux System Administration:</b> Extensive hands-on experience in deploying, configuring, and troubleshooting various Linux distributions, including Ubuntu LTS (16.04 to 26.04), Kubuntu, and CentOS.</li>
-                <li><b>OpenMediaVault (OMV) Deployment:</b> Skilled in setting up OpenMediaVault OS for robust Network-Attached Storage (NAS) solutions, configuring user permissions, storage pools, and implementing automated file-sharing protocols across the corporate infrastructure.</li>
-                <li><b>Intranet Configuration & Maintenance:</b> Expert in designing, building, and maintaining secure enterprise Intranet frameworks to ensure seamless data exchange, unified internal communication, and stable local network resources.</li>
-                <li><b>Network Security & Firewalls:</b> Experienced in managing network integrity, implementing advanced security protocols, and configuring/maintaining Sophos Firewalls, routers, and managed network switches.</li>
-                <li><b>Network Infrastructure Design:</b> Competent in setting up and diagnosing complete LAN, WAN, and WLAN network topologies, managing structured cabling, and expanding network connectivity between corporate HQs and plant units.</li>
-                <li><b>Web & Graphic Design Foundation:</b> Foundational technical knowledge in web development technologies (HTML, CSS, JavaScript) paired with standard design software suites like Photoshop, CorelDraw, and GIMP.</li>
-                <li><b>ERP Client & Database Support:</b> Adept at handling client-side configurations, user management, and technical troubleshooting for Proximo ERP (php7.01) and SAP HANA systems.</li>
-                <li><b>Cross-Platform Troubleshooting:</b> Strong diagnostic skills for resolving complex hardware, peripheral, and OS-level bottlenecks across multiple platforms including Windows (7, 8.1, 10, 11) and enterprise servers.</li>
-                <li><b>Virtualization & Remote Storage:</b> Practical experience in managing virtualized environments via VMware infrastructure and managing data synchronization routines using WD Sharing Point tools.</li>
-                <li><b>Infrastructure Backup & Disaster Recovery:</b> Proficient in designing and executing strict multi-point data backup strategies (both manual and automated) on central servers to ensure high data availability and business continuity.</li>
-                <li><b>Communication & Surveillance Systems:</b> Skilled in installing, monitoring, and managing commercial Closed-Circuit Television (CCTV) systems alongside configuring enterprise EPABX/intercom telephone routing networks.</li>
-            </ul>
-        </div>
-        
-        <br><br>
-        
-        <div>
-            <h1>Professional Experience <img src="work-logo.png" width="30px" height="30px" alt="Work Logo"></h1>
-            <hr>
-            
-            <h2><b>Senior IT Engineer</b></h2>
-            <p>Emdet Engineers Pvt. Ltd. | Dharuhera, Haryana || Rudrapur, Uttarakhand, March 2018 – Present</p>
-            <p><b>Company Profile Context:</b> Currently managing core IT operations at Emdet Engineers Pvt. Ltd., including infrastructure integration for Syska Miterr Private Limited —a high-tech joint venture between Syska LED Lights, Emdet Engineers, and Miter & Miter Group. The organization is driven by entrepreneurial technologists specializing in large-scale manufacturing of switchgears, lighting systems, wires, and cables.</p>
-            <p><b>Key Professional Responsibilities:</b></p>
-            <ul>
-                <li><b>Multi-Site Infrastructure Integration:</b> Orchestrated and maintained seamless data communication, network synchronization, and systems integrity between the Corporate Headquarters (Gurugram) and Production Unit-1 (Dharuhera HSIIDC).</li>
-                <li><b>Enterprise Server Administration:</b> Expertly administered Windows Server 2016 environments, configuring and managing critical enterprise services including Wind-chill Remote Access, Tally Remote Data Services, and automated multi-point data backups.</li>
-                <li><b>OpenMediaVault (NAS) Implementation:</b> Successfully deployed OpenMediaVault (OMV) OS to establish a robust Network-Attached Storage solution, configuring secure automated file-sharing layouts and user access policies.</li>
-                <li><b>Cross-Platform OS Management:</b> Supervised end-to-end deployment, peripheral configuration, and driver setups across diverse operating systems, maintaining stability on Windows (7/8.1/10/11), Windows Server 2016, and various Linux LTS distributions (Ubuntu 16.04 to 22.04, CentOS, Kubuntu).</li>
-                <li><b>Network Security & Firewalls:</b> Maintained high availability of network architecture by configuring and monitoring Sophos Firewalls, enterprise routers, managed switches, and structured intranet cabling pipelines to ensure zero business downtime.</li>
-                <li><b>ERP Architecture & Network Support:</b> Resolved critical client-side bottlenecks for Proximo ERP (php7.01 framework), mapped network printer topologies, and diagnostics for LAN/WAN/WLAN configurations.</li>
-                <li><b>Collaborative Tools & Communication:</b> Supervised digital collaboration architectures via Jitsi Meet, Microsoft Teams, and Zoom, while maintaining local hardware systems like CCTV surveillance loops and EPABX intercom telecom routing.</li>
-                <li><b>Technical Support Leadership:</b> Delivered top-tier remote and endpoint technical support while managing internal team dynamics, setting strategic productivity goals, and aligning IT support workflows with business objectives.</li>
-            </ul>
-            
-            <br><br>   
-            
-            <h2><b>CCE, DMS Client & Server Support</b></h2>
-            <p>Agarwal Motors | Rudrapur, Uttarakhand, September 2016 – February 2018</p>
-            <p><b>Key Professional Responsibilities:</b></p>
-            <ul>
-                <li><b>Server & DMS Control:</b> Managed Windows Server 2012 R2 infrastructure running Dealer Management System (DMS), Tally 9, and internal file-sharing network setups.</li>
-                <li><b>Disaster Recovery:</b> Formulated and executed strict manual data backup routines on the central server to protect enterprise records against data loss.</li>
-                <li><b>IT Procurement & Upgrades:</b> Actively participated in technical procurement workflows, evaluated hardware/software resource requirements, and collaborated with cross-functional teams to deploy system upgrades.</li>
-                <li><b>Technical Training:</b> Conducted corporate user-training programs for office automation tools (MS Office suite) and resolved server-client architecture issues.</li>
-            </ul>
-            
-            <br><br>
-            
-            <h2><b>Network / Desktop Support Engineer</b></h2>
-            <p>HCS | New Delhi, May 2012 – January 2016</p>
-            <p><b>Key Professional Responsibilities:</b></p>
-            <ul>
-                <li><b>Infrastructure Redundancy:</b> Served as the primary point of contact for disaster mitigation, providing critical backup systems and networks during live hardware or software failovers.</li>
-                <li><b>Network Documentation:</b> Designed, maintained, and logged comprehensive network topology diagrams and extensive infrastructure implementation blueprints.</li>
-                <li><b>SLA-Bound Support:</b> Delivered high-quality remote and on-site L2 technical support, debugging core OS defects, software vulnerabilities, and desktop peripheral issues.</li>
-                <li><b>Cost Optimization:</b> Developed cost-reduction strategies and hardware deployment proposals that successfully diminished organizational operational expenses.</li>
-            </ul>
-            
-            <br><br>
-            
-            <h2><b>Desktop Support Engineer</b></h2>
-            <p>Simple Infosystems Pvt. Ltd. (Noida, Uttar Pradesh), August 2011 – April 2012</p>
-            <p><b>Key Professional Responsibilities:</b></p>
-            <ul>
-                <li>Resolved multi-tier client technical inquiries for desktop hardware and client software.</li>
-                <li>Assisted with computer software deployment, system updates, and logged diagnostic support tokens.</li>
-            </ul>
-        </div>
-        
-        <br><br>
-
-        <div>
-            <h1>EDUCATION <img src="Education-logo.png" width="30px" height="30px" alt="Education Logo"></h1>
-            <hr>
-            <table style="width: 100%;">
-                <tr class="edu">
-                    <th>Examination</th>
-                    <th>Year</th>
-                    <th>School/College</th>
-                    <th>Board/University</th>
-                </tr>
-                <tr class="edu">
-                    <td>Class X</td>
-                    <td>2004</td>
-                    <td>Janta Inter College, Rudrapur (U.S.Nagar)</td>
-                    <td>U.A. Board (Uttarakhand)</td>
-                </tr>
-                <tr class="edu">
-                    <td>Class XII</td>
-                    <td>2006</td>
-                    <td>Janta Inter College, Rudrapur (U.S.Nagar)</td>
-                    <td>U.A. Board (Uttarakhand)</td>
-                </tr>
-                <tr class="edu">
-                    <td>Bachelor of Commerce</td>
-                    <td>2009</td>
-                    <td>Kumaun University, Nainital</td>
-                    <td>Kumaun University</td>
-                </tr>
-            </table>
-        </div>
-        
-        <br><br>
-        
-        <div>
-            <h1>TECHNICAL QUALIFICATION <img src="TECH-LOGO.png" width="30px" height="30px" alt="Tech Logo"></h1>
-            <hr>
-            <ul>
-                <li>
-                    <b>Higher Diploma in System and Networking (Global Net+)</b><br>
-                    Institute: NIIT, Connaught Place, New Delhi | Duration: November 2009 – February 2012
-                </li>
-                <li>
-                    <b>MCITP (Microsoft Certified IT Professional)</b><br>
-                    Institute: NIIT, Connaught Place, New Delhi
-                    <ol>
-                        <li>Windows 7, Configuration: Specialized in enterprise client deployment, desktop security, and network setting configurations.</li>
-                        <li>Windows Server 2008 Active Directory Configuration: Proficient in managing identity infrastructures, domain controllers, and group policies.</li>
-                        <li>Windows Server 2008 Network Infrastructure, Configuration: Expert in setting up core network services like DNS, DHCP, routing, and remote access structures.</li>
-                        <li>Server Administrator on Windows Server 2008 R2: Trained in full-scale server provisioning, backup management, and infrastructure monitoring.</li>
-                    </ol>
-                </li>
-                <li>
-                    <b>CCNA (Cisco Certified Network Associate)</b><br>
-                    Institute: NIIT, Connaught Place, New Delhi
-                    <ol>
-                        <li>Routing and Switching: Thoroughly certified in configuring Cisco routers/switches, mapping network topologies, building VLANs, and managing secure LAN/WAN protocols.</li>
-                    </ol>
-                </li>
-                <li>
-                    <b>CompTIA A+ (Systems Specialist)</b><br>
-                    Institute: NIIT, Connaught Place, New Delhi
-                    <ol>
-                        <li>CompTIA A+ Essentials</li>
-                        <li>CompTIA A+ Practical Application</li>      
-                    </ol>
-                </li>
-                <li>
-                    <b>Tally 7.2 & Foundation Computer Applications</b><br>
-                    Institute: Bilingual (The School of Foreign Languages & Computer Education), Haldwani, Uttarakhand
-                </li>
-            </ul>
-        </div>
-        
-        <br><br>
-        
-        <div>
-            <h1>PERSONAL DETAILS <img src="personal-details-logo.png" width="30px" height="30px" alt="Personal Details Logo"></h1>
-            <hr>
-            <table width="100%">
-                <tr>
-                    <td width="30%">Father’s Name</td>
-                    <td width="5%">=</td>
-                    <td>Mr. Gyanendra Bala</td>
-                </tr>
-                <tr>
-                    <td>Date of birth</td>
-                    <td>=</td>
-                    <td>February 10, 1987</td>
-                </tr>
-                <tr>
-                    <td>Sex</td>
-                    <td>=</td>
-                    <td>Male</td>
-                </tr>
-                <tr>
-                    <td>Nationality</td>
-                    <td>=</td>
-                    <td>Indian</td>
-                </tr>
-                <tr>
-                    <td>Marital status</td>
-                    <td>=</td>
-                    <td>Married</td>
-                </tr>
-                <tr>
-                    <td>Languages Known</td>
-                    <td>=</td>
-                    <td>
-                        English <img src="English.png" alt="English" style="vertical-align: middle; max-height: 20px;"><br>
-                        Hindi <img src="Hindi.png" alt="Hindi" style="vertical-align: middle; max-height: 20px;"><br>
-                        Bangla <img src="bangla.png" alt="Bangla" style="vertical-align: middle; max-height: 20px;">
-                    </td>
-                </tr>
-            </table>
-        </div>
-        
-        <br><br>
-        
-        <div>
-            <h1>CONTACTS <img src="Contacts-logo.png" width="30px" height="30px" alt="Contacts Logo"></h1>
-            <hr>
-            <table border="0">
-                <tr>
-                    <td><img src="Mobile-logo.png" height="25px" alt="Mobile"></td>
-                    <td><b>+91- 8585-96-8585</b></td>
-                </tr>
-                <tr>
-                    <td><img src="Email-logo.png" height="25px" alt="Email"></td>
-                    <td><b>abhijeetbala@outlook.com</b></td>
-                </tr>
-                <tr>
-                    <td><img src="address-logo.png" height="25px" alt="Address"></td>
-                    <td>House No. - 724, Sanjay Nagar, Ward No. -11, Rudrapur, Udham Singh Nagar, Uttarakhand - 263153, India</td>
-                </tr>
-            </table>
-        </div>
-        
-        <br><br>
-        
-        <div>
-            <h1>DECLARATION <img src="Declaration-logo.png" width="30px" height="30px" alt="Declaration Logo"></h1>
-            <hr>
-            <p>All the above information is correct and under my knowledge. I would be responsible for any type of mistake.</p>
-            <br>
-            <span class="span1">
-                - Abhijeet Bala <br>
-                Rudrapur, Uttarakhand
-            </span>
-        </div>
-        
-        <br><br>
-    </div>
-
-    <div class="more1"> 
-        <button><a href="profile.html">Download resume</a></button>
-    </div>
 </body>
 </html>
