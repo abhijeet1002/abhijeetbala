@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhijeet Bala — IT Ops Logbook</title>
+<title>Abhijeet Bala — IT Ops Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#080d14;
-    --navy-2:#0f172a;
+    --navy:#0b1420;
+    --navy-2:#101b28;
     --gold:#14b8a6;
     --gold-soft:#2dd4bf;
     --paper:#f8fafc;
-    --ink:#0f172a;
-    --muted:#475569;
+    --paper-shadow:#eef2f6;
+    --ink:#111827;
+    --muted:#5c6572;
     --accent:#f59e0b;
-    --line:#cbd5e1;
+    --line:#e2e8f0;
     --font-display:'Space Grotesk', sans-serif;
     --font-body:'Source Serif 4', serif;
     --font-mono:'IBM Plex Mono', monospace;
@@ -25,8 +26,7 @@
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ height:100%; }
   body{
-    background: linear-gradient(to bottom, rgba(8, 13, 20, 0.82), rgba(15, 23, 42, 0.92)),
-                url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat fixed;
+    background: radial-gradient(ellipse at 50% 0%, #1c2833 0%, #0b0f14 65%);
     font-family: var(--font-body);
     color: var(--ink);
     min-height:100vh;
@@ -41,14 +41,13 @@
   }
   body.ready{ opacity:1; transform:scale(1); }
   body.leaving{ opacity:0; transform: scale(.98); }
-
   .home-btn{
     position: fixed;
     top: 20px; left: 20px;
     z-index: 100;
     display:flex; align-items:center; gap:7px;
-    background: rgba(15, 23, 42, 0.75);
-    border: 1px solid rgba(45, 212, 191, 0.3);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
     color: var(--gold-soft);
     font-family: var(--font-mono);
     font-size: 11px;
@@ -56,16 +55,38 @@
     text-decoration:none;
     padding: 8px 14px 8px 12px;
     border-radius: 22px;
-    backdrop-filter: blur(8px);
-    transition: all .25s ease;
+    backdrop-filter: blur(6px);
+    transition: background .25s ease, transform .2s ease, box-shadow .25s ease;
   }
   .home-btn:hover{
-    background: rgba(20, 184, 166, 0.2);
-    border-color: var(--gold-soft);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+    background: rgba(45,212,191,.16);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(20,184,166,.25);
   }
+  .home-btn svg{ display:block; }
 
+  /* 3D isometric background illustration */
+  .bg3d{
+    position:fixed; inset:0; z-index:0;
+    pointer-events:none; overflow:hidden;
+    perspective: 1600px;
+  }
+  .bg3d .scene{
+    position:absolute;
+    transform-style: preserve-3d;
+    animation: tumble3d 16s ease-in-out infinite;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,.45));
+  }
+  .bg3d .scene.a{ width:300px; top:-40px; right:-50px; opacity:.4; }
+  .bg3d .scene.b{ width:220px; bottom:-40px; left:-40px; opacity:.3; animation-duration:20s; animation-delay:-6s; }
+  @keyframes tumble3d{
+    0%,100%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(0deg) translateY(0); }
+    50%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(14deg) translateY(-16px); }
+  }
+  .bg3d .led-blink{ animation: ledBlink 2.4s ease-in-out infinite; }
+  .bg3d .led-blink.d2{ animation-delay:.6s; }
+  .bg3d .led-blink.d3{ animation-delay:1.2s; }
+  @keyframes ledBlink{ 0%,100%{ opacity:.9; } 50%{ opacity:.25; } }
   .rig{
     width:100%;
     max-width: 760px;
@@ -83,8 +104,7 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform:uppercase;
-    opacity:.9;
-    text-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+    opacity:.75;
   }
   .stage{
     position:relative;
@@ -96,50 +116,50 @@
     position:relative;
     width:100%;
     height:100%;
-    border-radius: 8px;
-    box-shadow: 0 35px 70px -15px rgba(0,0,0,0.8), 0 0 30px rgba(20, 184, 166, 0.15);
+    border-radius: 6px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.65), 0 4px 18px rgba(0,0,0,.35);
   }
-  
   .spine{
     position:absolute;
-    left:-10px; top:12px; bottom:12px;
-    width: 20px;
-    background: linear-gradient(180deg, #0f172a, #1e293b 50%, #0f172a);
+    left:-9px; top:14px; bottom:14px;
+    width: 18px;
+    background: linear-gradient(180deg, #0d1116, #1a2530 8%, #1a2530 92%, #0d1116);
     border-radius: 4px;
     z-index: 20;
-    box-shadow: inset -2px 0 5px rgba(0,0,0,0.6);
+    box-shadow: inset -2px 0 4px rgba(0,0,0,.5);
   }
   .spine .hole{
     position:absolute; left:50%; transform:translateX(-50%);
     width:6px; height:6px; border-radius:50%;
-    background: radial-gradient(circle at 35% 35%, #94a3b8, #0f172a 70%);
+    background: radial-gradient(circle at 35% 35%, #4a5a68, #0a0d10 70%);
   }
 
   .page{
     position:absolute; inset:0;
     background: var(--paper);
-    border-radius: 8px;
+    border-radius: 6px;
     transform-origin: left center;
     transform: rotateY(0deg);
     opacity: 0;
     pointer-events:none;
     z-index:1;
     will-change: transform, opacity;
+    box-shadow: 0 2px 0 rgba(0,0,0,.05) inset;
     background-image:
-      repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.08) 0px, rgba(148, 163, 184, 0.08) 1px, transparent 1px, transparent 32px),
-      repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.05) 0px, rgba(148, 163, 184, 0.05) 1px, transparent 1px, transparent 32px);
+      repeating-linear-gradient(0deg, rgba(100,116,139,.06) 0px, rgba(100,116,139,.06) 1px, transparent 1px, transparent 34px),
+      repeating-linear-gradient(90deg, rgba(100,116,139,.045) 0px, rgba(100,116,139,.045) 1px, transparent 1px, transparent 34px);
   }
-  .page.current{ opacity:1; pointer-events:auto; z-index:5; box-shadow: 10px 0 30px rgba(0,0,0,0.25); }
+  .page.current{ opacity:1; pointer-events:auto; z-index:5; box-shadow: 8px 0 24px rgba(0,0,0,.18); }
   .page.cover, .page.backcover{
-    background: linear-gradient(145deg, #0f172a, #020617);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(155deg, #131b24, #0c1117 60%);
+    background-image: repeating-linear-gradient(135deg, rgba(20,184,166,.06) 0 2px, transparent 2px 26px);
   }
 
   .page-inner{
     height:100%;
     width:100%;
     overflow-y:auto;
-    padding: 32px 36px 28px 42px;
+    padding: 30px 34px 26px 42px;
     scrollbar-width: thin;
     scrollbar-color: var(--gold) transparent;
   }
@@ -148,44 +168,44 @@
 
   .tab{
     position:absolute;
-    right:-2px; top: 40px;
-    background: var(--gold);
-    color: var(--navy);
+    right:-2px; top: 46px;
+    background: var(--navy-2);
+    color: var(--gold-soft);
     font-family: var(--font-mono);
-    font-weight: 600;
     font-size: 10px;
-    letter-spacing: 1px;
-    padding: 6px 10px;
-    border-radius: 4px 0 0 4px;
-    box-shadow: -2px 2px 6px rgba(0,0,0,0.2);
+    letter-spacing: 2px;
+    padding: 5px 9px 5px 11px;
+    border-radius: 3px 0 0 3px;
+    box-shadow: -2px 2px 5px rgba(0,0,0,.25);
   }
 
   .eyebrow{
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:8px;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: var(--accent);
     text-transform:uppercase;
     margin-bottom: 6px;
   }
-  .eyebrow::before{
-    content:"";
-    width: 16px; height: 2px;
-    background: var(--accent);
-    display:inline-block;
-  }
+  .eyebrow svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; }
+  
   h1.title{
     font-family: var(--font-display);
     font-weight:700;
-    font-size: 23px;
+    font-size: 22px;
     color: var(--ink);
     letter-spacing: .3px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
+  .title-icon { width: 22px; height: 22px; stroke: var(--gold); fill: none; }
+
   .rule{
-    height:2px;
-    background: linear-gradient(to right, var(--gold), transparent 85%);
+    height:1px;
+    background: linear-gradient(to right, var(--gold), transparent 75%);
     margin-bottom: 18px;
   }
   p.copy{
@@ -197,16 +217,16 @@
   }
   ul.list, ol.sublist{ margin-left: 18px; margin-bottom: 10px; }
   ul.list li, ol.sublist li{
-    font-size: 13.5px;
+    font-size: 13.6px;
     line-height:1.55;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 9px;
   }
-  ul.list li b, ol.sublist li b{ color: var(--ink); font-family: var(--font-display); font-weight:600; }
+  ul.list li b, ol.sublist li b{ color: var(--ink); font-family: var(--font-display); font-weight:600; font-size:13.6px; }
   h2.role{
     font-family: var(--font-display);
     font-size: 15.5px;
-    color: #d97706;
+    color: var(--accent);
     margin-top: 16px;
     margin-bottom: 2px;
   }
@@ -216,6 +236,7 @@
     color: var(--muted);
     letter-spacing:.4px;
     margin-bottom: 8px;
+    opacity:.9;
   }
   table.dt{ width:100%; border-collapse:collapse; margin-top:6px; }
   table.dt th{
@@ -234,31 +255,32 @@
     padding: 9px 6px;
     border-bottom: 1px solid var(--line);
   }
-  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; margin-bottom: 14px; }
   .tag{
     font-family: var(--font-mono);
     font-size: 10px;
-    background: rgba(20, 184, 166, 0.1);
-    color: #0d9488;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(20, 184, 166, 0.3);
+    background: rgba(245,158,11,.10);
+    color: var(--accent);
+    padding: 4px 9px;
+    border-radius: 3px;
+    border: 1px solid rgba(245,158,11,.28);
+    font-weight: 500;
   }
 
-  /* Cover Page Styling */
+  /* Cover page */
   .cover .page-inner, .backcover .page-inner{
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
     padding: 30px;
-    cursor: pointer;
+    overflow:hidden;
   }
   .monogram{
-    width: 96px; height: 96px; border-radius:50%;
-    border: 2px solid var(--gold-soft);
+    width: 88px; height: 88px; border-radius:50%;
+    border: 2px solid var(--gold);
     display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-display); font-weight:700; font-size: 30px;
+    font-family: var(--font-display); font-weight:700; font-size: 28px;
     color: var(--gold-soft);
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px rgba(45, 212, 191, 0.25);
+    margin-bottom: 22px;
+    box-shadow: 0 0 0 5px rgba(20,184,166,.10);
     overflow:hidden;
     background: var(--navy-2);
   }
@@ -266,76 +288,69 @@
   .cover h1{
     font-family: var(--font-display); font-weight:700;
     font-size: clamp(24px, 5vw, 32px);
-    color: #f8fafc;
+    color: #f4ecd8;
     letter-spacing: 2px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .cover .role{
     font-family: var(--font-mono);
     color: var(--gold-soft);
     font-size: 12px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform:uppercase;
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
   .cover .tagbar{
     font-family: var(--font-mono);
     font-size: 10.5px;
-    color: #94a3b8;
+    color: #8b96a3;
     letter-spacing: 1px;
-    border-top: 1px solid rgba(255,255,255,.1);
-    border-bottom: 1px solid rgba(255,255,255,.1);
+    border-top: 1px solid rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,.12);
     padding: 10px 16px;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
   }
   .open-hint{
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--gold-soft);
     letter-spacing: 1.5px;
-    animation: pulse 1.8s ease-in-out infinite;
-    background: rgba(245, 158, 11, 0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    animation: nudge 1.8s ease-in-out infinite;
   }
-  @keyframes pulse{ 0%,100%{ transform: scale(1); opacity:.8;} 50%{ transform: scale(1.04); opacity:1;} }
+  @keyframes nudge{ 0%,100%{ transform: translateX(0); opacity:.7;} 50%{ transform: translateX(6px); opacity:1;} }
   .asset-tag{
     position:absolute; bottom: 18px; left:0; right:0;
     text-align:center;
     font-family: var(--font-mono);
     font-size: 9.5px;
-    color: #64748b;
+    color: #5c6b7a;
     letter-spacing: 1.5px;
   }
 
-  /* Index Page */
+  /* index page */
   .idx-row{
-    display:flex; align-items:center; gap:12px;
+    display:flex; align-items:baseline; gap:10px;
     font-family: var(--font-mono);
     font-size: 13px;
     color: var(--ink);
-    padding: 10px 8px;
+    padding: 9px 0;
     border-bottom: 1px dotted var(--line);
-    border-radius: 4px;
     cursor:pointer;
-    transition: all .2s ease;
   }
-  .idx-row .n{ color: var(--accent); font-weight:600; min-width: 20px; }
+  .idx-row .n{ color: var(--accent); font-weight:600; }
   .idx-row .t{ flex:1; }
-  .idx-row:hover{ background: rgba(20, 184, 166, 0.08); padding-left: 14px; }
-  .idx-row:hover .t{ color: #0d9488; font-weight: 600; }
+  .idx-row:hover .t{ color: var(--accent); }
 
-  /* Contacts */
+  /* Contacts icons */
   .contact-line{ display:flex; align-items:center; gap:12px; margin-bottom: 16px; }
   .contact-line .ic{
-    width:36px; height:36px; border-radius:50%;
-    background: rgba(245, 158, 11, 0.12);
+    width:34px; height:34px; border-radius:50%;
+    background: rgba(245,158,11,.10);
     display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
   }
   .contact-line b{ font-size:14px; color:var(--ink); }
-  .contact-line span.sub{ display:block; font-size:12px; color:var(--muted); }
+  .contact-line span.sub{ display:block; font-size:12.5px; color:var(--muted); }
 
   .lang-badges{ display:flex; gap:8px; margin-top:4px; }
   .lang-badges span{
@@ -344,45 +359,41 @@
     padding:3px 9px; border-radius: 3px;
   }
 
-  .sign-block{ margin-top: 22px; }
-  .sign-block .name{ font-family: var(--font-display); font-weight:700; font-size:16px; color:var(--ink); }
-  .sign-block small{ color: var(--muted); font-family: var(--font-mono); font-size:11px; }
-
-  .dl-btn{
-    display:inline-block; margin-top: 22px;
-    background: linear-gradient(135deg, var(--gold), #0d9488);
-    color: #ffffff;
-    font-family: var(--font-mono);
-    font-weight:600;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-decoration:none;
-    padding: 12px 26px;
-    border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
-    transition: transform .2s ease, box-shadow .2s ease;
+  /* Tech Logo Styles */
+  .tech-item {
+    margin-bottom: 16px;
   }
-  .dl-btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4); }
+  .tech-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tech-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
 
-  /* Controls */
+  /* Nav controls */
   .controls{
     display:flex; align-items:center; justify-content:center; gap: 22px;
   }
   .nav-btn{
     width: 42px; height:42px; border-radius:50%;
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(45, 212, 191, 0.3);
-    color: var(--gold-soft);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    color: #2dd4bf;
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
-    transition: all .2s ease;
+    transition: background .2s ease, transform .15s ease;
     font-size: 18px;
     user-select:none;
   }
-  .nav-btn:hover{ background: rgba(20, 184, 166, 0.25); transform: scale(1.08); border-color: var(--gold-soft); }
+  .nav-btn:hover{ background: rgba(230,198,103,.15); transform: scale(1.06); }
+  .nav-btn.disabled{ opacity:.25; pointer-events:none; }
   .pageno{
     font-family: var(--font-mono);
-    color:#cbd5e1;
+    color:#9aa4b0;
     font-size: 12px;
     letter-spacing: 1px;
     min-width: 60px;
@@ -390,14 +401,14 @@
   }
 
   .clickzone{
-    position:absolute; top:0; bottom:0; width:25%;
+    position:absolute; top:0; bottom:0; width:35%;
     z-index: 30; cursor:pointer;
   }
   .clickzone.left{ left:0; }
   .clickzone.right{ right:0; }
 
   @media (max-width: 560px){
-    .page-inner{ padding: 24px 20px 20px 28px; }
+    .page-inner{ padding: 22px 20px 20px 30px; }
     h1.title{ font-size:19px; }
     .stage{ height: min(640px, 74vh); }
   }
@@ -405,19 +416,45 @@
 </head>
 <body>
 
+<div class="bg3d" aria-hidden="true">
+  <svg class="scene a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,20 170,58 100,96 30,58" fill="#1a2a38"/>
+      <polygon points="30,58 100,96 100,150 30,112" fill="#101c26"/>
+      <polygon points="170,58 100,96 100,150 170,112" fill="#0c161f"/>
+      <polygon points="42,66 92,93 92,104 42,77" fill="#14b8a6" opacity=".18"/>
+      <circle class="led-blink" cx="52" cy="72" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d2" cx="52" cy="86" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d3" cx="52" cy="100" r="3" fill="#f59e0b"/>
+      <polygon points="100,64 158,95 158,106 100,75" fill="#0d1a24"/>
+      <polygon points="100,88 158,119 158,130 100,99" fill="#0d1a24"/>
+    </g>
+  </svg>
+  <svg class="scene b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,30 160,63 100,96 40,63" fill="#182432"/>
+      <polygon points="40,63 100,96 100,140 40,107" fill="#0f1922"/>
+      <polygon points="160,63 100,96 100,140 160,107" fill="#0b141c"/>
+      <circle class="led-blink" cx="58" cy="78" r="2.6" fill="#f59e0b"/>
+      <circle class="led-blink d2" cx="58" cy="90" r="2.6" fill="#2dd4bf"/>
+      <polygon points="108,72 150,95 150,104 108,81" fill="#101d28"/>
+    </g>
+  </svg>
+</div>
+
 <a href="index.html" class="home-btn nav-transition">
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
   HOME
 </a>
 
 <div class="rig">
-  <div class="masthead">IT OPERATIONS LOGBOOK · PORTABLE EDITION</div>
+  <div class="masthead">IT OPERATIONS PORTFOLIO · (PORTABLE EDITION)</div>
 
   <div class="stage">
     <div class="spine" id="spine"></div>
     <div class="book" id="book">
 
-      <div class="page cover current" data-title="Cover" onclick="flipTo(1)">
+      <div class="page cover current" data-title="Cover">
         <div class="page-inner">
           <div class="monogram" id="coverMonogram">
             <img src="Profile_pic.jpg" alt="Abhijeet Bala" onerror="this.remove(); document.getElementById('coverMonogram').textContent='AB';">
@@ -427,7 +464,7 @@
           <div class="tagbar">12+ YEARS · INFRASTRUCTURE &amp; NETWORK OPERATIONS</div>
           <div class="open-hint">CLICK OR SWIPE TO OPEN →</div>
         </div>
-        <div class="asset-tag">LOG.PORTFOLIO — REV 2026.08 — RUDRAPUR, UTTARAKHAND, IN</div>
+        <div class="asset-tag">PORTFOLIO — RUDRAPUR, UTTARAKHAND, INDIA - 263153</div>
       </div>
 
       <div class="page" data-title="Index">
@@ -436,24 +473,30 @@
           <div class="eyebrow">Contents</div>
           <h1 class="title">Index</h1>
           <div class="rule"></div>
-          <div class="idx-row" data-goto="2"><span class="n">01</span><span class="t">Professional Summary</span></div>
-          <div class="idx-row" data-goto="3"><span class="n">02</span><span class="t">Core Skills — Systems &amp; Network</span></div>
-          <div class="idx-row" data-goto="4"><span class="n">03</span><span class="t">Core Skills — Support &amp; Ops</span></div>
-          <div class="idx-row" data-goto="5"><span class="n">04</span><span class="t">Experience — Emdet Engineers</span></div>
-          <div class="idx-row" data-goto="6"><span class="n">05</span><span class="t">Experience — Prior Roles</span></div>
-          <div class="idx-row" data-goto="7"><span class="n">06</span><span class="t">Education</span></div>
-          <div class="idx-row" data-goto="8"><span class="n">07</span><span class="t">Technical Qualifications</span></div>
-          <div class="idx-row" data-goto="9"><span class="n">08</span><span class="t">Personal Details</span></div>
-          <div class="idx-row" data-goto="10"><span class="n">09</span><span class="t">Contacts</span></div>
-          <div class="idx-row" data-goto="11"><span class="n">10</span><span class="t">Declaration</span></div>
+          <div class="idx-row" onclick="flipTo(2)"><span class="n">01</span><span class="t">Professional Summary</span></div>
+          <div class="idx-row" onclick="flipTo(3)"><span class="n">02</span><span class="t">Core Skills — Systems &amp; Network</span></div>
+          <div class="idx-row" onclick="flipTo(4)"><span class="n">03</span><span class="t">Core Skills — Support &amp; Ops</span></div>
+          <div class="idx-row" onclick="flipTo(5)"><span class="n">04</span><span class="t">Professional Experience</span></div>
+          <div class="idx-row" onclick="flipTo(6)"><span class="n">05</span><span class="t">Professional Experience (prior Roles)</span></div>
+          <div class="idx-row" onclick="flipTo(7)"><span class="n">06</span><span class="t">Professional Experience (prior Roles - Cont.)</span></div>
+          <div class="idx-row" onclick="flipTo(8)"><span class="n">07</span><span class="t">Education</span></div>
+          <div class="idx-row" onclick="flipTo(9)"><span class="n">08</span><span class="t">Technical Qualifications</span></div>
+          <div class="idx-row" onclick="flipTo(10)"><span class="n">09</span><span class="t">Contacts</span></div>
+          <div class="idx-row" onclick="flipTo(11)"><span class="n">10</span><span class="t">Personal Details</span></div>
         </div>
       </div>
 
       <div class="page" data-title="Summary">
         <div class="tab">01</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 01</div>
-          <h1 class="title">Professional Summary</h1>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Overview
+          </div>
+          <h1 class="title">
+            <svg class="title-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Professional Summary
+          </h1>
           <div class="rule"></div>
           <p class="copy">A dedicated Senior IT Engineer with 12+ years of experience in optimizing IT operations and maintaining robust network infrastructures.</p>
           <ul class="list">
@@ -468,9 +511,18 @@
       <div class="page" data-title="Skills I">
         <div class="tab">02</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 02</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            Capabilities
+          </div>
           <h1 class="title">Core Skills — Systems &amp; Network</h1>
           <div class="rule"></div>
+          
+          <div class="tag-row">
+            <span class="tag">Windows Server</span><span class="tag">Linux</span><span class="tag">OMV / NAS</span>
+            <span class="tag">Sophos</span><span class="tag">VMware</span><span class="tag">SAP HANA</span><span class="tag">Intranet</span>
+          </div>
+
           <ul class="list">
             <li><b>Windows Server Management:</b> Administering and configuring Windows Server 2016 &amp; 2012 R2, Active Directory, Wind-chill Remote Access, and Tally Remote Data Services.</li>
             <li><b>Linux System Administration:</b> Deploying, configuring, and troubleshooting Ubuntu LTS (16.04–26.04), Kubuntu, and CentOS.</li>
@@ -485,7 +537,10 @@
       <div class="page" data-title="Skills II">
         <div class="tab">03</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 03</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+            Operations
+          </div>
           <h1 class="title">Core Skills — Support &amp; Ops</h1>
           <div class="rule"></div>
           <ul class="list">
@@ -496,28 +551,32 @@
             <li><b>Backup &amp; Disaster Recovery:</b> Designing manual and automated multi-point backup strategies for high data availability.</li>
             <li><b>Communication &amp; Surveillance:</b> Installing and managing commercial CCTV systems and enterprise EPABX/intercom networks.</li>
           </ul>
-          <div class="tag-row">
-            <span class="tag">Windows Server</span><span class="tag">Linux</span><span class="tag">OMV / NAS</span>
-            <span class="tag">Sophos</span><span class="tag">VMware</span><span class="tag">SAP HANA</span>
-          </div>
         </div>
       </div>
 
       <div class="page" data-title="Experience I">
         <div class="tab">04</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 04</div>
-          <h1 class="title">Experience — Emdet Engineers</h1>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Career
+          </div>
+          <h1 class="title">Professional Experience</h1>
           <div class="rule"></div>
           <h2 class="role">Senior IT Engineer</h2>
-          <div class="meta">EMDET ENGINEERS PVT. LTD. · DHARUHERA &amp; RUDRAPUR · MAR 2018 – PRESENT</div>
-          <p class="copy"><b>Company Profile Context:</b> Currently managing core IT operations at Emdet Engineers Pvt. Ltd., including infrastructure integration for Syska Miterr Private Limited — a joint venture between Syska LED Lights, Emdet Engineers, and Miter &amp; Miter Group.</p>
+          <div class="meta">Emdet Engineers Pvt. Ltd. | Dharuhera, Haryana || Rudrapur, Uttarakhand, March 2018 – Present</div>
+          <p class="copy"><b>Company Profile Context:</b> Currently managing core IT operations at Emdet Engineers Pvt. Ltd., including infrastructure integration for Syska Miterr Private Limited — a high-tech joint venture between Syska LED Lights, Emdet Engineers, and Miter &amp; Miter Group. The organization is driven by entrepreneurial technologists specializing in large-scale manufacturing of switchgears, lighting systems, wires, and cables.</p>
+          
+          <p style="font-weight:600; font-family:var(--font-display); margin-top:12px; margin-bottom:6px; color:var(--ink);">Key Professional Responsibilities:</p>
           <ul class="list">
-            <li><b>Multi-Site Infrastructure Integration:</b> Orchestrated seamless data communication between Corporate HQ (Gurugram) and Production Unit-1 (Dharuhera HSIIDC).</li>
-            <li><b>Enterprise Server Administration:</b> Administered Windows Server 2016, managing Wind-chill Remote Access, Tally Remote Data Services, and automated backups.</li>
-            <li><b>OMV (NAS) Implementation:</b> Deployed OpenMediaVault for robust NAS solutions with secure user access policies.</li>
-            <li><b>Network Security &amp; Firewalls:</b> Configured and monitored Sophos Firewalls, routers, and managed switches for high availability.</li>
-            <li><b>Technical Support Leadership:</b> Delivered remote and endpoint support while managing team dynamics and productivity goals.</li>
+            <li><b>Multi-Site Infrastructure Integration:</b> Orchestrated and maintained seamless data communication, network synchronization, and systems integrity between the Corporate Headquarters (Gurugram) and Production Unit-1 (Dharuhera HSIIDC).</li>
+            <li><b>Enterprise Server Administration:</b> Expertly administered Windows Server 2016 environments, configuring and managing critical enterprise services including Wind-chill Remote Access, Tally Remote Data Services, and automated multi-point data backups.</li>
+            <li><b>OpenMediaVault (NAS) Implementation:</b> Successfully deployed OpenMediaVault (OMV) OS to establish a robust Network-Attached Storage solution, configuring secure automated file-sharing layouts and user-access policies.</li>
+            <li><b>Cross-Platform OS Management:</b> Supervised end-to-end deployment, peripheral configuration, and driver setups across diverse operating systems, maintaining stability on Windows (7/8.1/10/11), Windows Server 2016, and various Linux LTS distributions (Ubuntu 16.04 to 26.04, CentOS, Kubuntu).</li>
+            <li><b>Network Security &amp; Firewalls:</b> Maintained high availability of network architecture by configuring and monitoring Sophos Firewalls, enterprise routers, managed switches, and structured intranet cabling pipelines to ensure zero business downtime.</li>
+            <li><b>ERP Architecture &amp; Network Support:</b> Resolved critical client-side bottlenecks for Proximo ERP (php7.01 framework), mapped network printer topologies, and diagnostics for LAN/WAN/WLAN configurations.</li>
+            <li><b>Collaborative Tools &amp; Communication:</b> Supervised digital collaboration architectures via Jitsi Meet, Microsoft Teams, and Zoom, while maintaining local hardware systems like CCTV surveillance loops and EPABX intercom telecom routing.</li>
+            <li><b>Technical Support Leadership:</b> Delivered top-tier remote and endpoint technical support while managing internal team dynamics, setting strategic productivity goals, and aligning IT support workflows with business objectives.</li>
           </ul>
         </div>
       </div>
@@ -525,39 +584,59 @@
       <div class="page" data-title="Experience II">
         <div class="tab">05</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 05</div>
-          <h1 class="title">Experience — Prior Roles</h1>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            History
+          </div>
+          <h1 class="title">Professional Experience (prior Roles)</h1>
           <div class="rule"></div>
 
           <h2 class="role">CCE, DMS Client &amp; Server Support</h2>
-          <div class="meta">AGARWAL MOTORS · RUDRAPUR · SEP 2016 – FEB 2018</div>
+          <div class="meta">Agarwal Motors | Rudrapur, Uttarakhand, September 2016 – February 2018</div>
           <ul class="list">
-            <li>Managed Windows Server 2012 R2 running DMS, Tally 9, and internal file-sharing networks.</li>
-            <li>Formulated and executed manual data backup routines to protect enterprise records.</li>
-            <li>Participated in IT procurement, evaluating hardware/software requirements.</li>
+            <li><b>Server &amp; DMS Control:</b> Managed Windows Server 2012 R2 infrastructure running Dealer Management System (DMS), Tally 9, and internal file-sharing network setups.</li>
+            <li><b>Disaster Recovery:</b> Formulated and executed strict manual data backup routines on the central server to protect enterprise records against data loss.</li>
+            <li><b>IT Procurement &amp; Upgrades:</b> Actively participated in technical procurement workflows, evaluated hardware/software resource requirements, and collaborated with cross-functional teams to deploy system upgrades.</li>
+            <li><b>Technical Training:</b> Conducted corporate user-training programs for office automation tools (MS Office suite) and resolved server-client architecture issues.</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="page" data-title="Experience III">
+        <div class="tab">06</div>
+        <div class="page-inner">
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            History (Cont.)
+          </div>
+          <h1 class="title">Professional Experience (prior Roles)</h1>
+          <div class="rule"></div>
 
           <h2 class="role">Network / Desktop Support Engineer</h2>
-          <div class="meta">HCS · NEW DELHI · MAY 2012 – JAN 2016</div>
+          <div class="meta">HCS | New Delhi, May 2012 – January 2016</div>
           <ul class="list">
-            <li>Primary point of contact for disaster mitigation, providing backup systems during live failovers.</li>
-            <li>Designed and maintained network topology diagrams and infrastructure blueprints.</li>
-            <li>Delivered SLA-bound L2 support, debugging OS defects and desktop peripheral issues.</li>
+            <li><b>Infrastructure Redundancy:</b> Served as the primary point of contact for disaster mitigation, providing critical backup systems and networks during live hardware or software failovers.</li>
+            <li><b>Network Documentation:</b> Designed, maintained, and logged comprehensive network topology diagrams and extensive infrastructure implementation blueprints.</li>
+            <li><b>SLA-Bound Support:</b> Delivered high-quality remote and on-site L2 technical support, debugging core OS defects, software vulnerabilities, and desktop peripheral issues.</li>
+            <li><b>Cost Optimization:</b> Developed cost-reduction strategies and hardware deployment proposals that successfully diminished organizational operational expenses.</li>
           </ul>
 
           <h2 class="role">Desktop Support Engineer</h2>
-          <div class="meta">SIMPLE INFOSYSTEMS PVT. LTD. · NOIDA · AUG 2011 – APR 2012</div>
+          <div class="meta">Simple Infosystems Pvt. Ltd. (Noida, Uttar Pradesh), August 2011 – April 2012</div>
           <ul class="list">
-            <li>Resolved multi-tier client inquiries for desktop hardware and software.</li>
-            <li>Assisted with software deployment, system updates, and diagnostic support logs.</li>
+            <li>Resolved multi-tier client technical inquiries for desktop hardware and client software.</li>
+            <li>Assisted with computer software deployment, system updates, and logged diagnostic support tokens.</li>
           </ul>
         </div>
       </div>
 
       <div class="page" data-title="Education">
-        <div class="tab">06</div>
+        <div class="tab">07</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 06</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Academics
+          </div>
           <h1 class="title">Education</h1>
           <div class="rule"></div>
           <table class="dt">
@@ -572,16 +651,27 @@
       </div>
 
       <div class="page" data-title="Tech Qualifications">
-        <div class="tab">07</div>
+        <div class="tab">08</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 07</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Certifications
+          </div>
           <h1 class="title">Technical Qualifications</h1>
           <div class="rule"></div>
           <ul class="list">
-            <li><b>Higher Diploma in System and Networking (Global Net+)</b>
+            <li class="tech-item">
+              <div class="tech-header">
+                <img src="niit_logo.png" alt="NIIT Logo" class="tech-logo" onerror="this.style.display='none'">
+                <b>Higher Diploma in System and Networking (Global Net+)</b>
+              </div>
               <div class="meta">NIIT, Connaught Place, New Delhi · Nov 2009 – Feb 2012</div>
             </li>
-            <li><b>MCITP (Microsoft Certified IT Professional)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+            <li class="tech-item">
+              <div class="tech-header">
+                <img src="microsoft_logo.png" alt="Microsoft Logo" class="tech-logo" onerror="this.style.display='none'">
+                <b>MCITP (Microsoft Certified IT Professional)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+              </div>
               <ol class="sublist">
                 <li>Windows 7 Configuration: enterprise client deployment &amp; desktop security.</li>
                 <li>Windows Server 2008 Active Directory: identity infrastructures &amp; domain controllers.</li>
@@ -589,41 +679,38 @@
                 <li>Server Administrator, Windows Server 2008 R2: provisioning &amp; backup management.</li>
               </ol>
             </li>
-            <li><b>CCNA (Cisco Certified Network Associate)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+            <li class="tech-item">
+              <div class="tech-header">
+                <img src="cisco_logo.png" alt="Cisco Logo" class="tech-logo" onerror="this.style.display='none'">
+                <b>CCNA (Cisco Certified Network Associate)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+              </div>
               <ol class="sublist"><li>Routing and Switching: Cisco routers/switches, VLANs, secure LAN/WAN protocols.</li></ol>
             </li>
-            <li><b>CompTIA A+ (Systems Specialist)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+            <li class="tech-item">
+              <div class="tech-header">
+                <img src="comptia_logo.png" alt="CompTIA Logo" class="tech-logo" onerror="this.style.display='none'">
+                <b>CompTIA A+ (Systems Specialist)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
+              </div>
               <ol class="sublist"><li>CompTIA A+ Essentials &amp; Practical Application.</li></ol>
             </li>
-            <li><b>Tally 7.2 &amp; Foundation Computer Applications</b>
+            <li class="tech-item">
+              <div class="tech-header">
+                <img src="tally_logo.png" alt="Tally Logo" class="tech-logo" onerror="this.style.display='none'">
+                <b>Tally 7.2 &amp; Foundation Computer Applications</b>
+              </div>
               <div class="meta">Bilingual, Haldwani, Uttarakhand</div>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="page" data-title="Personal">
-        <div class="tab">08</div>
-        <div class="page-inner">
-          <div class="eyebrow">Log_Entry 08</div>
-          <h1 class="title">Personal Details</h1>
-          <div class="rule"></div>
-          <table class="dt">
-            <tr><td style="width:38%;font-weight:600;">Father's Name</td><td>Mr. Gyanendra Bala</td></tr>
-            <tr><td style="font-weight:600;">Date of Birth</td><td>February 10, 1987</td></tr>
-            <tr><td style="font-weight:600;">Sex / Nationality</td><td>Male / Indian</td></tr>
-            <tr><td style="font-weight:600;">Marital Status</td><td>Married</td></tr>
-            <tr><td style="font-weight:600; vertical-align:top;">Languages Known</td>
-              <td><div class="lang-badges"><span>ENGLISH</span><span>HINDI</span><span>BANGLA</span></div></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
       <div class="page" data-title="Contacts">
         <div class="tab">09</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 09</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Connect
+          </div>
           <h1 class="title">Contacts</h1>
           <div class="rule"></div>
 
@@ -637,7 +724,7 @@
           </div>
           <div class="contact-line">
             <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><b>House No. 724, Sanjay Nagar, Ward 11</b><span class="sub">Rudrapur, Udham Singh Nagar, Uttarakhand – 263153, India</span></div>
+            <div><b>House No. 724, Sanjay Nagar, Ward No. 11</b><span class="sub">Rudrapur, Udham Singh Nagar, Uttarakhand – 263153, India</span></div>
           </div>
 
           <div class="rule" style="margin-top:20px;"></div>
@@ -648,25 +735,31 @@
         </div>
       </div>
 
-      <div class="page" data-title="Declaration">
+      <div class="page" data-title="Personal Details">
         <div class="tab">10</div>
         <div class="page-inner">
-          <div class="eyebrow">Log_Entry 10</div>
-          <h1 class="title">Declaration</h1>
-          <div class="rule"></div>
-          <p class="copy" style="font-style:italic;">All the above information is correct and under my knowledge. I would be responsible for any type of mistake.</p>
-          <div class="sign-block">
-            <div class="name">Abhijeet Bala</div>
-            <small>Rudrapur, Uttarakhand</small>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Information
           </div>
-          <a class="dl-btn" href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view?usp=sharing" target="_blank">Download Resume ↓</a>
+          <h1 class="title">Personal Details</h1>
+          <div class="rule"></div>
+          <table class="dt">
+            <tr><td style="width:38%;font-weight:600;">Father's Name</td><td>Mr. Gyanendra Bala</td></tr>
+            <tr><td style="font-weight:600; vertical-align:top;">Languages Known</td>
+              <td><div class="lang-badges"><span>ENGLISH</span><span>HINDI</span><span>BANGLA</span></div></td>
+            </tr>
+            <tr><td style="font-weight:600; vertical-align:top;">Permanent Address</td>
+              <td>House No. 724, Sanjay Nagar, Ward No. 11, Rudrapur, Udham Singh Nagar, Uttarakhand - 263153, India</td>
+            </tr>
+          </table>
         </div>
       </div>
 
-      <div class="page backcover" data-title="Back Cover" onclick="flipTo(0)">
+      <div class="page backcover" data-title="Back Cover">
         <div class="page-inner">
           <div class="monogram" style="width:60px;height:60px;font-size:18px;">AB</div>
-          <div class="open-hint" style="animation:none; opacity:.85;">END OF LOG — REPEAT ⟲</div>
+          <div class="open-hint" style="animation:none; opacity:.85;">END OF LOG</div>
         </div>
         <div class="asset-tag">THANK YOU FOR REVIEWING — ABHIJEET BALA</div>
       </div>
@@ -678,7 +771,7 @@
 
   <div class="controls">
     <div class="nav-btn" id="prevBtn">‹</div>
-    <div class="pageno" id="pageNo">01 / 13</div>
+    <div class="pageno" id="pageNo">01 / 12</div>
     <div class="nav-btn" id="nextBtn">›</div>
   </div>
 </div>
@@ -705,6 +798,7 @@
     if(animating || newIndex===current) return;
     if(newIndex<0) newIndex = pages.length-1;
     if(newIndex>=pages.length) newIndex = 0;
+    if(newIndex===current) return;
     animating = true;
     const dir = (newIndex > current || (current===pages.length-1 && newIndex===0)) ? 'next' : 'prev';
     const oldPage = pages[current];
@@ -739,51 +833,17 @@
     }, 780);
   }
 
-  document.getElementById('prevBtn').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current-1); });
-  document.getElementById('nextBtn').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current+1); });
-  document.getElementById('zoneLeft').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current-1); });
-  document.getElementById('zoneRight').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current+1); });
+  document.getElementById('prevBtn').addEventListener('click', ()=>flipTo(current-1));
+  document.getElementById('nextBtn').addEventListener('click', ()=>flipTo(current+1));
+  document.getElementById('zoneLeft').addEventListener('click', ()=>flipTo(current-1));
+  document.getElementById('zoneRight').addEventListener('click', ()=>flipTo(current+1));
 
-  // Index Links Event Handlers
-  document.querySelectorAll('.idx-row').forEach(row=>{
-    row.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const pageIndex = parseInt(row.dataset.goto, 10);
-      flipTo(pageIndex);
-    });
-  });
-
-  // Swipe / Touch Support
-  let touchStartX = 0;
-  let touchEndX = 0;
-  const bookEl = document.getElementById('book');
-
-  bookEl.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, {passive: true});
-
-  bookEl.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, {passive: true});
-
-  function handleSwipe() {
-    const swipeThreshold = 40;
-    if (touchEndX < touchStartX - swipeThreshold) {
-      flipTo(current + 1); // Swipe Left -> Next Page
-    }
-    if (touchEndX > touchStartX + swipeThreshold) {
-      flipTo(current - 1); // Swipe Right -> Prev Page
-    }
-  }
-
-  // Keyboard navigation
   window.addEventListener('keydown', (e)=>{
     if(e.key === 'ArrowRight') flipTo(current+1);
     if(e.key === 'ArrowLeft') flipTo(current-1);
   });
 
-  // Spine Rack Holes
+  // spine rack holes
   const spine = document.getElementById('spine');
   for(let i=0;i<14;i++){
     const h = document.createElement('div');
@@ -794,10 +854,10 @@
 
   updateUI();
 
-  // Smooth entrance
+  // smooth entrance
   requestAnimationFrame(()=> requestAnimationFrame(()=> document.body.classList.add('ready')));
 
-  // Smooth exit before navigating home
+  // smooth exit before navigating home
   document.querySelectorAll('.nav-transition').forEach(link=>{
     link.addEventListener('click', function(e){
       e.preventDefault();
