@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#10161d;
-    --navy-2:#1a2530;
-    --gold:#c9a227;
-    --gold-soft:#e6c667;
-    --paper:#f7f3e8;
-    --paper-shadow:#e9e2cd;
-    --ink:#1c2530;
+    --navy:#0b1420;
+    --navy-2:#101b28;
+    --gold:#14b8a6;
+    --gold-soft:#2dd4bf;
+    --paper:#f8fafc;
+    --paper-shadow:#eef2f6;
+    --ink:#111827;
     --muted:#5c6572;
-    --accent:#007acc;
-    --line:#ded4b4;
+    --accent:#f59e0b;
+    --line:#e2e8f0;
     --font-display:'Space Grotesk', sans-serif;
     --font-body:'Source Serif 4', serif;
     --font-mono:'IBM Plex Mono', monospace;
@@ -35,7 +35,58 @@
     justify-content:center;
     padding: 28px 12px;
     overflow-x:hidden;
+    opacity: 0;
+    transform: scale(.98);
+    transition: opacity .5s ease, transform .5s ease;
   }
+  body.ready{ opacity:1; transform:scale(1); }
+  body.leaving{ opacity:0; transform: scale(.98); }
+  .home-btn{
+    position: fixed;
+    top: 20px; left: 20px;
+    z-index: 100;
+    display:flex; align-items:center; gap:7px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    color: var(--gold-soft);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-decoration:none;
+    padding: 8px 14px 8px 12px;
+    border-radius: 22px;
+    backdrop-filter: blur(6px);
+    transition: background .25s ease, transform .2s ease, box-shadow .25s ease;
+  }
+  .home-btn:hover{
+    background: rgba(45,212,191,.16);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(20,184,166,.25);
+  }
+  .home-btn svg{ display:block; }
+
+  /* 3D isometric background illustration */
+  .bg3d{
+    position:fixed; inset:0; z-index:0;
+    pointer-events:none; overflow:hidden;
+    perspective: 1600px;
+  }
+  .bg3d .scene{
+    position:absolute;
+    transform-style: preserve-3d;
+    animation: tumble3d 16s ease-in-out infinite;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,.45));
+  }
+  .bg3d .scene.a{ width:300px; top:-40px; right:-50px; opacity:.4; }
+  .bg3d .scene.b{ width:220px; bottom:-40px; left:-40px; opacity:.3; animation-duration:20s; animation-delay:-6s; }
+  @keyframes tumble3d{
+    0%,100%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(0deg) translateY(0); }
+    50%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(14deg) translateY(-16px); }
+  }
+  .bg3d .led-blink{ animation: ledBlink 2.4s ease-in-out infinite; }
+  .bg3d .led-blink.d2{ animation-delay:.6s; }
+  .bg3d .led-blink.d3{ animation-delay:1.2s; }
+  @keyframes ledBlink{ 0%,100%{ opacity:.9; } 50%{ opacity:.25; } }
   .rig{
     width:100%;
     max-width: 760px;
@@ -43,6 +94,8 @@
     flex-direction:column;
     align-items:center;
     gap: 18px;
+    position:relative;
+    z-index:1;
   }
   .masthead{
     text-align:center;
@@ -86,20 +139,21 @@
     position:absolute; inset:0;
     background: var(--paper);
     border-radius: 6px;
-    transform-origin: center center;
-    transform: rotateY(0deg) scale(1);
+    transform-origin: left center;
+    transform: rotateY(0deg);
     opacity: 0;
     pointer-events:none;
     z-index:1;
+    will-change: transform, opacity;
     box-shadow: 0 2px 0 rgba(0,0,0,.05) inset;
     background-image:
-      repeating-linear-gradient(0deg, rgba(180,160,110,.07) 0px, rgba(180,160,110,.07) 1px, transparent 1px, transparent 34px),
-      repeating-linear-gradient(90deg, rgba(180,160,110,.05) 0px, rgba(180,160,110,.05) 1px, transparent 1px, transparent 34px);
+      repeating-linear-gradient(0deg, rgba(100,116,139,.06) 0px, rgba(100,116,139,.06) 1px, transparent 1px, transparent 34px),
+      repeating-linear-gradient(90deg, rgba(100,116,139,.045) 0px, rgba(100,116,139,.045) 1px, transparent 1px, transparent 34px);
   }
-  .page.current{ opacity:1; pointer-events:auto; z-index:5; }
+  .page.current{ opacity:1; pointer-events:auto; z-index:5; box-shadow: 8px 0 24px rgba(0,0,0,.18); }
   .page.cover, .page.backcover{
     background: linear-gradient(155deg, #131b24, #0c1117 60%);
-    background-image: repeating-linear-gradient(135deg, rgba(201,162,39,.05) 0 2px, transparent 2px 26px);
+    background-image: repeating-linear-gradient(135deg, rgba(20,184,166,.06) 0 2px, transparent 2px 26px);
   }
 
   .page-inner{
@@ -205,11 +259,11 @@
   .tag{
     font-family: var(--font-mono);
     font-size: 10px;
-    background: rgba(0,122,204,.09);
+    background: rgba(245,158,11,.10);
     color: var(--accent);
     padding: 3px 8px;
     border-radius: 3px;
-    border: 1px solid rgba(0,122,204,.25);
+    border: 1px solid rgba(245,158,11,.28);
   }
 
   /* Cover page */
@@ -225,8 +279,11 @@
     font-family: var(--font-display); font-weight:700; font-size: 28px;
     color: var(--gold-soft);
     margin-bottom: 22px;
-    box-shadow: 0 0 0 5px rgba(201,162,39,.08);
+    box-shadow: 0 0 0 5px rgba(20,184,166,.10);
+    overflow:hidden;
+    background: var(--navy-2);
   }
+  .monogram img{ width:100%; height:100%; object-fit:cover; }
   .cover h1{
     font-family: var(--font-display); font-weight:700;
     font-size: clamp(24px, 5vw, 32px);
@@ -287,7 +344,7 @@
   .contact-line{ display:flex; align-items:center; gap:12px; margin-bottom: 16px; }
   .contact-line .ic{
     width:34px; height:34px; border-radius:50%;
-    background: rgba(0,122,204,.08);
+    background: rgba(245,158,11,.10);
     display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
   }
@@ -328,7 +385,7 @@
     width: 42px; height:42px; border-radius:50%;
     background: rgba(255,255,255,.06);
     border: 1px solid rgba(255,255,255,.15);
-    color: #e6c667;
+    color: #2dd4bf;
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
     transition: background .2s ease, transform .15s ease;
@@ -362,6 +419,37 @@
 </head>
 <body>
 
+<div class="bg3d" aria-hidden="true">
+  <svg class="scene a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,20 170,58 100,96 30,58" fill="#1a2a38"/>
+      <polygon points="30,58 100,96 100,150 30,112" fill="#101c26"/>
+      <polygon points="170,58 100,96 100,150 170,112" fill="#0c161f"/>
+      <polygon points="42,66 92,93 92,104 42,77" fill="#14b8a6" opacity=".18"/>
+      <circle class="led-blink" cx="52" cy="72" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d2" cx="52" cy="86" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d3" cx="52" cy="100" r="3" fill="#f59e0b"/>
+      <polygon points="100,64 158,95 158,106 100,75" fill="#0d1a24"/>
+      <polygon points="100,88 158,119 158,130 100,99" fill="#0d1a24"/>
+    </g>
+  </svg>
+  <svg class="scene b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,30 160,63 100,96 40,63" fill="#182432"/>
+      <polygon points="40,63 100,96 100,140 40,107" fill="#0f1922"/>
+      <polygon points="160,63 100,96 100,140 160,107" fill="#0b141c"/>
+      <circle class="led-blink" cx="58" cy="78" r="2.6" fill="#f59e0b"/>
+      <circle class="led-blink d2" cx="58" cy="90" r="2.6" fill="#2dd4bf"/>
+      <polygon points="108,72 150,95 150,104 108,81" fill="#101d28"/>
+    </g>
+  </svg>
+</div>
+
+<a href="index.html" class="home-btn nav-transition">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+  HOME
+</a>
+
 <div class="rig">
   <div class="masthead">IT OPERATIONS LOGBOOK · PORTABLE EDITION</div>
 
@@ -372,7 +460,9 @@
       <!-- COVER -->
       <div class="page cover current" data-title="Cover">
         <div class="page-inner">
-          <div class="monogram">AB</div>
+          <div class="monogram" id="coverMonogram">
+            <img src="Profile_pic.jpg" alt="Abhijeet Bala" onerror="this.remove(); document.getElementById('coverMonogram').textContent='AB';">
+          </div>
           <h1>ABHIJEET BALA</h1>
           <div class="role">Senior Engineer — Information Technology</div>
           <div class="tagbar">12+ YEARS · INFRASTRUCTURE &amp; NETWORK OPERATIONS</div>
@@ -589,15 +679,15 @@
           <div class="rule"></div>
 
           <div class="contact-line">
-            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
             <div><b>+91-8585-96-8585</b><span class="sub">Mobile</span></div>
           </div>
           <div class="contact-line">
-            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div>
+            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div>
             <div><b>abhijeetbala@outlook.com</b><span class="sub">Email</span></div>
           </div>
           <div class="contact-line">
-            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#007acc" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div><b>House No. 724, Sanjay Nagar, Ward 11</b><span class="sub">Rudrapur, Udham Singh Nagar, Uttarakhand – 263153, India</span></div>
           </div>
 
@@ -654,31 +744,41 @@
   function updateUI(){
     document.getElementById('pageNo').textContent =
       String(current+1).padStart(2,'0') + ' / ' + String(pages.length).padStart(2,'0');
-    document.getElementById('prevBtn').classList.toggle('disabled', current===0);
-    document.getElementById('nextBtn').classList.toggle('disabled', current===pages.length-1);
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    prevBtn.classList.remove('disabled');
+    nextBtn.classList.remove('disabled');
+    prevBtn.innerHTML = current===0 ? '⟲' : '‹';
+    nextBtn.innerHTML = current===pages.length-1 ? '⟲' : '›';
+    prevBtn.title = current===0 ? 'Back to start' : 'Previous page';
+    nextBtn.title = current===pages.length-1 ? 'Back to start' : 'Next page';
   }
 
   function flipTo(newIndex){
-    if(animating || newIndex===current || newIndex<0 || newIndex>=pages.length) return;
+    if(animating || newIndex===current) return;
+    if(newIndex<0) newIndex = pages.length-1;
+    if(newIndex>=pages.length) newIndex = 0;
+    if(newIndex===current) return;
     animating = true;
-    const dir = newIndex > current ? 'next' : 'prev';
+    const dir = (newIndex > current || (current===pages.length-1 && newIndex===0)) ? 'next' : 'prev';
     const oldPage = pages[current];
     const newPage = pages[newIndex];
+    const EASE = 'cubic-bezier(.22,.61,.36,1)';
 
     oldPage.style.zIndex = 5;
     newPage.style.zIndex = 6;
     newPage.style.transition = 'none';
-    newPage.style.transform = (dir==='next' ? 'rotateY(92deg) scale(.97)' : 'rotateY(-92deg) scale(.97)');
+    newPage.style.transform = (dir==='next' ? 'rotateY(58deg)' : 'rotateY(-150deg)');
     newPage.style.opacity = '0';
     newPage.style.pointerEvents = 'auto';
     void newPage.offsetWidth;
-    newPage.style.transition = 'transform .68s cubic-bezier(.4,.1,.2,1), opacity .5s ease';
-    oldPage.style.transition = 'transform .68s cubic-bezier(.4,.1,.2,1), opacity .5s ease';
+    newPage.style.transition = `transform .78s ${EASE}, opacity .6s ease`;
+    oldPage.style.transition = `transform .78s ${EASE}, opacity .6s ease`;
 
     requestAnimationFrame(()=>{
-      oldPage.style.transform = (dir==='next' ? 'rotateY(-92deg) scale(.97)' : 'rotateY(92deg) scale(.97)');
+      oldPage.style.transform = (dir==='next' ? 'rotateY(-150deg)' : 'rotateY(58deg)');
       oldPage.style.opacity = '0';
-      newPage.style.transform = 'rotateY(0deg) scale(1)';
+      newPage.style.transform = 'rotateY(0deg)';
       newPage.style.opacity = '1';
     });
 
@@ -690,7 +790,7 @@
       current = newIndex;
       animating = false;
       updateUI();
-    }, 700);
+    }, 780);
   }
 
   document.getElementById('prevBtn').addEventListener('click', ()=>flipTo(current-1));
@@ -717,6 +817,20 @@
   }
 
   updateUI();
+
+  // smooth entrance
+  requestAnimationFrame(()=> requestAnimationFrame(()=> document.body.classList.add('ready')));
+
+  // smooth exit before navigating home
+  document.querySelectorAll('.nav-transition').forEach(link=>{
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      document.body.classList.remove('ready');
+      document.body.classList.add('leaving');
+      setTimeout(()=>{ window.location.href = href; }, 420);
+    });
+  });
 </script>
 
 </body>
