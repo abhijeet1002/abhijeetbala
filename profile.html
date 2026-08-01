@@ -9,16 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0b1420;
-    --navy-2:#101b28;
+    --navy:#080d14;
+    --navy-2:#0f172a;
     --gold:#14b8a6;
     --gold-soft:#2dd4bf;
-    --paper:#f8fafc;
-    --paper-shadow:#eef2f6;
-    --ink:#111827;
-    --muted:#5c6572;
+    --paper:#ffffff;
+    --ink:#0f172a;
+    --muted:#475569;
     --accent:#f59e0b;
-    --line:#e2e8f0;
+    --line:#cbd5e1;
     --font-display:'Space Grotesk', sans-serif;
     --font-body:'Source Serif 4', serif;
     --font-mono:'IBM Plex Mono', monospace;
@@ -26,7 +25,8 @@
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ height:100%; }
   body{
-    background: radial-gradient(ellipse at 50% 0%, #1c2833 0%, #0b0f14 65%);
+    background: linear-gradient(to bottom, rgba(8, 13, 20, 0.88), rgba(15, 23, 42, 0.95)),
+                url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat fixed;
     font-family: var(--font-body);
     color: var(--ink);
     min-height:100vh;
@@ -41,13 +41,14 @@
   }
   body.ready{ opacity:1; transform:scale(1); }
   body.leaving{ opacity:0; transform: scale(.98); }
+
   .home-btn{
     position: fixed;
     top: 20px; left: 20px;
     z-index: 100;
     display:flex; align-items:center; gap:7px;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(45, 212, 191, 0.4);
     color: var(--gold-soft);
     font-family: var(--font-mono);
     font-size: 11px;
@@ -55,38 +56,16 @@
     text-decoration:none;
     padding: 8px 14px 8px 12px;
     border-radius: 22px;
-    backdrop-filter: blur(6px);
-    transition: background .25s ease, transform .2s ease, box-shadow .25s ease;
+    backdrop-filter: blur(8px);
+    transition: all .25s ease;
   }
   .home-btn:hover{
-    background: rgba(45,212,191,.16);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(20,184,166,.25);
+    background: rgba(20, 184, 166, 0.25);
+    border-color: var(--gold-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
   }
-  .home-btn svg{ display:block; }
 
-  /* 3D isometric background illustration */
-  .bg3d{
-    position:fixed; inset:0; z-index:0;
-    pointer-events:none; overflow:hidden;
-    perspective: 1600px;
-  }
-  .bg3d .scene{
-    position:absolute;
-    transform-style: preserve-3d;
-    animation: tumble3d 16s ease-in-out infinite;
-    filter: drop-shadow(0 30px 40px rgba(0,0,0,.45));
-  }
-  .bg3d .scene.a{ width:300px; top:-40px; right:-50px; opacity:.4; }
-  .bg3d .scene.b{ width:220px; bottom:-40px; left:-40px; opacity:.3; animation-duration:20s; animation-delay:-6s; }
-  @keyframes tumble3d{
-    0%,100%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(0deg) translateY(0); }
-    50%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(14deg) translateY(-16px); }
-  }
-  .bg3d .led-blink{ animation: ledBlink 2.4s ease-in-out infinite; }
-  .bg3d .led-blink.d2{ animation-delay:.6s; }
-  .bg3d .led-blink.d3{ animation-delay:1.2s; }
-  @keyframes ledBlink{ 0%,100%{ opacity:.9; } 50%{ opacity:.25; } }
   .rig{
     width:100%;
     max-width: 760px;
@@ -104,11 +83,12 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform:uppercase;
-    opacity:.75;
+    opacity:.9;
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.4);
   }
   .stage{
     position:relative;
-    width: min(640px, 94vw);
+    width: min(650px, 94vw);
     height: min(800px, 78vh);
     perspective: 2200px;
   }
@@ -116,50 +96,49 @@
     position:relative;
     width:100%;
     height:100%;
-    border-radius: 6px;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,.65), 0 4px 18px rgba(0,0,0,.35);
+    border-radius: 8px;
+    box-shadow: 0 35px 70px -15px rgba(0,0,0,0.85), 0 0 30px rgba(20, 184, 166, 0.2);
   }
   .spine{
     position:absolute;
-    left:-9px; top:14px; bottom:14px;
-    width: 18px;
-    background: linear-gradient(180deg, #0d1116, #1a2530 8%, #1a2530 92%, #0d1116);
+    left:-10px; top:12px; bottom:12px;
+    width: 20px;
+    background: linear-gradient(180deg, #0f172a, #1e293b 50%, #0f172a);
     border-radius: 4px;
     z-index: 20;
-    box-shadow: inset -2px 0 4px rgba(0,0,0,.5);
+    box-shadow: inset -2px 0 5px rgba(0,0,0,0.6);
   }
   .spine .hole{
     position:absolute; left:50%; transform:translateX(-50%);
     width:6px; height:6px; border-radius:50%;
-    background: radial-gradient(circle at 35% 35%, #4a5a68, #0a0d10 70%);
+    background: radial-gradient(circle at 35% 35%, #94a3b8, #0f172a 70%);
   }
 
   .page{
     position:absolute; inset:0;
     background: var(--paper);
-    border-radius: 6px;
+    border-radius: 8px;
     transform-origin: left center;
     transform: rotateY(0deg);
     opacity: 0;
     pointer-events:none;
     z-index:1;
     will-change: transform, opacity;
-    box-shadow: 0 2px 0 rgba(0,0,0,.05) inset;
     background-image:
-      repeating-linear-gradient(0deg, rgba(100,116,139,.06) 0px, rgba(100,116,139,.06) 1px, transparent 1px, transparent 34px),
-      repeating-linear-gradient(90deg, rgba(100,116,139,.045) 0px, rgba(100,116,139,.045) 1px, transparent 1px, transparent 34px);
+      repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.08) 0px, rgba(148, 163, 184, 0.08) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.05) 0px, rgba(148, 163, 184, 0.05) 1px, transparent 1px, transparent 32px);
   }
-  .page.current{ opacity:1; pointer-events:auto; z-index:5; box-shadow: 8px 0 24px rgba(0,0,0,.18); }
+  .page.current{ opacity:1; pointer-events:auto; z-index:5; box-shadow: 10px 0 30px rgba(0,0,0,0.25); }
   .page.cover, .page.backcover{
-    background: linear-gradient(155deg, #131b24, #0c1117 60%);
-    background-image: repeating-linear-gradient(135deg, rgba(20,184,166,.06) 0 2px, transparent 2px 26px);
+    background: linear-gradient(145deg, #0f172a, #020617);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .page-inner{
     height:100%;
     width:100%;
     overflow-y:auto;
-    padding: 30px 34px 26px 42px;
+    padding: 32px 36px 28px 42px;
     scrollbar-width: thin;
     scrollbar-color: var(--gold) transparent;
   }
@@ -168,35 +147,36 @@
 
   .tab{
     position:absolute;
-    right:-2px; top: 46px;
-    background: var(--navy-2);
-    color: var(--gold-soft);
+    right:-2px; top: 40px;
+    background: var(--gold);
+    color: var(--navy);
     font-family: var(--font-mono);
+    font-weight: 600;
     font-size: 10px;
-    letter-spacing: 2px;
-    padding: 5px 9px 5px 11px;
-    border-radius: 3px 0 0 3px;
-    box-shadow: -2px 2px 5px rgba(0,0,0,.25);
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border-radius: 4px 0 0 4px;
+    box-shadow: -2px 2px 6px rgba(0,0,0,0.2);
   }
 
   .eyebrow{
     display:flex; align-items:center; gap:8px;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     color: var(--accent);
     text-transform:uppercase;
     margin-bottom: 6px;
   }
   .eyebrow svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; }
-  
+
   h1.title{
     font-family: var(--font-display);
     font-weight:700;
     font-size: 22px;
     color: var(--ink);
     letter-spacing: .3px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -204,29 +184,29 @@
   .title-icon { width: 22px; height: 22px; stroke: var(--gold); fill: none; }
 
   .rule{
-    height:1px;
-    background: linear-gradient(to right, var(--gold), transparent 75%);
+    height:2px;
+    background: linear-gradient(to right, var(--gold), transparent 85%);
     margin-bottom: 18px;
   }
   p.copy{
-    font-size: 14.5px;
+    font-size: 14px;
     line-height:1.65;
     color: var(--muted);
     text-align:justify;
     margin-bottom: 12px;
   }
-  ul.list, ol.sublist{ margin-left: 18px; margin-bottom: 10px; }
+  ul.list, ol.sublist{ margin-left: 18px; margin-bottom: 12px; }
   ul.list li, ol.sublist li{
-    font-size: 13.6px;
+    font-size: 13px;
     line-height:1.55;
     color: var(--muted);
-    margin-bottom: 9px;
+    margin-bottom: 8px;
   }
-  ul.list li b, ol.sublist li b{ color: var(--ink); font-family: var(--font-display); font-weight:600; font-size:13.6px; }
+  ul.list li b, ol.sublist li b{ color: var(--ink); font-family: var(--font-display); font-weight:600; }
   h2.role{
     font-family: var(--font-display);
     font-size: 15.5px;
-    color: var(--accent);
+    color: #d97706;
     margin-top: 16px;
     margin-bottom: 2px;
   }
@@ -236,7 +216,6 @@
     color: var(--muted);
     letter-spacing:.4px;
     margin-bottom: 8px;
-    opacity:.9;
   }
   table.dt{ width:100%; border-collapse:collapse; margin-top:6px; }
   table.dt th{
@@ -255,32 +234,32 @@
     padding: 9px 6px;
     border-bottom: 1px solid var(--line);
   }
-  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; margin-bottom: 14px; }
+  .tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; margin-bottom: 14px; }
   .tag{
     font-family: var(--font-mono);
     font-size: 10px;
-    background: rgba(245,158,11,.10);
-    color: var(--accent);
-    padding: 4px 9px;
-    border-radius: 3px;
-    border: 1px solid rgba(245,158,11,.28);
+    background: rgba(20, 184, 166, 0.1);
+    color: #0d9488;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(20, 184, 166, 0.3);
     font-weight: 500;
   }
 
-  /* Cover page */
+  /* Cover Page Styling */
   .cover .page-inner, .backcover .page-inner{
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
     padding: 30px;
-    overflow:hidden;
+    cursor: pointer;
   }
   .monogram{
-    width: 88px; height: 88px; border-radius:50%;
-    border: 2px solid var(--gold);
+    width: 96px; height: 96px; border-radius:50%;
+    border: 2px solid var(--gold-soft);
     display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-display); font-weight:700; font-size: 28px;
+    font-family: var(--font-display); font-weight:700; font-size: 30px;
     color: var(--gold-soft);
-    margin-bottom: 22px;
-    box-shadow: 0 0 0 5px rgba(20,184,166,.10);
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.25);
     overflow:hidden;
     background: var(--navy-2);
   }
@@ -288,112 +267,262 @@
   .cover h1{
     font-family: var(--font-display); font-weight:700;
     font-size: clamp(24px, 5vw, 32px);
-    color: #f4ecd8;
+    color: #f8fafc;
     letter-spacing: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .cover .role{
     font-family: var(--font-mono);
     color: var(--gold-soft);
     font-size: 12px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform:uppercase;
-    margin-bottom: 26px;
+    margin-bottom: 22px;
   }
   .cover .tagbar{
     font-family: var(--font-mono);
     font-size: 10.5px;
-    color: #8b96a3;
+    color: #94a3b8;
     letter-spacing: 1px;
-    border-top: 1px solid rgba(255,255,255,.12);
-    border-bottom: 1px solid rgba(255,255,255,.12);
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
     padding: 10px 16px;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
   .open-hint{
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--gold-soft);
+    color: var(--accent);
     letter-spacing: 1.5px;
-    animation: nudge 1.8s ease-in-out infinite;
+    animation: pulse 1.8s ease-in-out infinite;
+    background: rgba(245, 158, 11, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
   }
-  @keyframes nudge{ 0%,100%{ transform: translateX(0); opacity:.7;} 50%{ transform: translateX(6px); opacity:1;} }
+  @keyframes pulse{ 0%,100%{ transform: scale(1); opacity:.8;} 50%{ transform: scale(1.04); opacity:1;} }
   .asset-tag{
     position:absolute; bottom: 18px; left:0; right:0;
     text-align:center;
     font-family: var(--font-mono);
     font-size: 9.5px;
-    color: #5c6b7a;
+    color: #64748b;
     letter-spacing: 1.5px;
   }
 
-  /* index page */
+  /* Index Page */
   .idx-row{
-    display:flex; align-items:baseline; gap:10px;
+    display:flex; align-items:center; gap:12px;
     font-family: var(--font-mono);
     font-size: 13px;
     color: var(--ink);
-    padding: 9px 0;
+    padding: 10px 8px;
     border-bottom: 1px dotted var(--line);
+    border-radius: 4px;
     cursor:pointer;
+    transition: all .2s ease;
   }
-  .idx-row .n{ color: var(--accent); font-weight:600; }
+  .idx-row .n{ color: var(--accent); font-weight:600; min-width: 20px; }
   .idx-row .t{ flex:1; }
-  .idx-row:hover .t{ color: var(--accent); }
-
-  /* Contacts icons */
-  .contact-line{ display:flex; align-items:center; gap:12px; margin-bottom: 16px; }
-  .contact-line .ic{
-    width:34px; height:34px; border-radius:50%;
-    background: rgba(245,158,11,.10);
-    display:flex; align-items:center; justify-content:center;
-    flex-shrink:0;
-  }
-  .contact-line b{ font-size:14px; color:var(--ink); }
-  .contact-line span.sub{ display:block; font-size:12.5px; color:var(--muted); }
-
-  .lang-badges{ display:flex; gap:8px; margin-top:4px; }
-  .lang-badges span{
-    font-family: var(--font-mono); font-size:10.5px;
-    background: var(--navy-2); color: var(--gold-soft);
-    padding:3px 9px; border-radius: 3px;
-  }
+  .idx-row:hover{ background: rgba(20, 184, 166, 0.08); padding-left: 14px; }
+  .idx-row:hover .t{ color: #0d9488; font-weight: 600; }
 
   /* Tech Logo Styles */
   .tech-item {
     margin-bottom: 16px;
+    list-style: none;
   }
   .tech-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 4px;
   }
   .tech-logo {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
+    border-radius: 4px;
+    background: #f1f5f9;
+    padding: 2px;
+    border: 1px solid #cbd5e1;
   }
 
-  /* Nav controls */
+  /* Contacts Styling */
+  .contact-line{ display:flex; align-items:center; gap:12px; margin-bottom: 16px; }
+  .contact-line .ic{
+    width:36px; height:36px; border-radius:50%;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-line b{ font-size:14px; color:var(--ink); }
+  .contact-line span.sub{ display:block; font-size:12px; color:var(--muted); }
+  .contact-line a{ color:inherit; text-decoration:none; }
+  .contact-line a:hover b{ color:#0d9488; }
+
+  /* Left-Right Dual Column Layout for Social & QR */
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .social-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .social-tag-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all .2s ease;
+  }
+  .social-tag-btn:hover {
+    background: #fde68a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    width: 120px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+  }
+  .qr-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+  }
+  .qr-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 3px;
+    border: 1px solid #e2e8f0;
+  }
+  .qr-card span {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--navy-2);
+    margin-top: 4px;
+  }
+
+  /* Download & Resume QR Container */
+  .resume-section {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--gold), #0d9488);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+    transition: all .25s ease;
+  }
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20, 184, 166, 0.45);
+    background: linear-gradient(135deg, #2dd4bf, var(--gold));
+  }
+  .resume-qr-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 10px;
+  }
+  .resume-qr-card img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px;
+    border: 1px solid #cbd5e1;
+  }
+  .resume-qr-card span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .sign-block{
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .sign-block .name{
+    font-family: var(--font-display);
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .sign-block small{
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size:11px;
+  }
+
+  /* Controls */
   .controls{
     display:flex; align-items:center; justify-content:center; gap: 22px;
   }
   .nav-btn{
     width: 42px; height:42px; border-radius:50%;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.15);
-    color: #2dd4bf;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    color: var(--gold-soft);
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
-    transition: background .2s ease, transform .15s ease;
+    transition: all .2s ease;
     font-size: 18px;
     user-select:none;
   }
-  .nav-btn:hover{ background: rgba(230,198,103,.15); transform: scale(1.06); }
-  .nav-btn.disabled{ opacity:.25; pointer-events:none; }
+  .nav-btn:hover{ background: rgba(20, 184, 166, 0.25); transform: scale(1.08); border-color: var(--gold-soft); }
   .pageno{
     font-family: var(--font-mono);
-    color:#9aa4b0;
+    color:#cbd5e1;
     font-size: 12px;
     letter-spacing: 1px;
     min-width: 60px;
@@ -401,46 +530,21 @@
   }
 
   .clickzone{
-    position:absolute; top:0; bottom:0; width:35%;
+    position:absolute; top:0; bottom:0; width:25%;
     z-index: 30; cursor:pointer;
   }
   .clickzone.left{ left:0; }
   .clickzone.right{ right:0; }
 
   @media (max-width: 560px){
-    .page-inner{ padding: 22px 20px 20px 30px; }
+    .page-inner{ padding: 24px 20px 20px 28px; }
     h1.title{ font-size:19px; }
     .stage{ height: min(640px, 74vh); }
+    .social-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-
-<div class="bg3d" aria-hidden="true">
-  <svg class="scene a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <g>
-      <polygon points="100,20 170,58 100,96 30,58" fill="#1a2a38"/>
-      <polygon points="30,58 100,96 100,150 30,112" fill="#101c26"/>
-      <polygon points="170,58 100,96 100,150 170,112" fill="#0c161f"/>
-      <polygon points="42,66 92,93 92,104 42,77" fill="#14b8a6" opacity=".18"/>
-      <circle class="led-blink" cx="52" cy="72" r="3" fill="#2dd4bf"/>
-      <circle class="led-blink d2" cx="52" cy="86" r="3" fill="#2dd4bf"/>
-      <circle class="led-blink d3" cx="52" cy="100" r="3" fill="#f59e0b"/>
-      <polygon points="100,64 158,95 158,106 100,75" fill="#0d1a24"/>
-      <polygon points="100,88 158,119 158,130 100,99" fill="#0d1a24"/>
-    </g>
-  </svg>
-  <svg class="scene b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <g>
-      <polygon points="100,30 160,63 100,96 40,63" fill="#182432"/>
-      <polygon points="40,63 100,96 100,140 40,107" fill="#0f1922"/>
-      <polygon points="160,63 100,96 100,140 160,107" fill="#0b141c"/>
-      <circle class="led-blink" cx="58" cy="78" r="2.6" fill="#f59e0b"/>
-      <circle class="led-blink d2" cx="58" cy="90" r="2.6" fill="#2dd4bf"/>
-      <polygon points="108,72 150,95 150,104 108,81" fill="#101d28"/>
-    </g>
-  </svg>
-</div>
 
 <a href="index.html" class="home-btn nav-transition">
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
@@ -454,7 +558,7 @@
     <div class="spine" id="spine"></div>
     <div class="book" id="book">
 
-      <div class="page cover current" data-title="Cover">
+      <div class="page cover current" data-title="Cover" onclick="flipTo(1)">
         <div class="page-inner">
           <div class="monogram" id="coverMonogram">
             <img src="Profile_pic.jpg" alt="Abhijeet Bala" onerror="this.remove(); document.getElementById('coverMonogram').textContent='AB';">
@@ -470,19 +574,22 @@
       <div class="page" data-title="Index">
         <div class="tab">INDEX</div>
         <div class="page-inner">
-          <div class="eyebrow">Contents</div>
+          <div class="eyebrow">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Contents
+          </div>
           <h1 class="title">Index</h1>
           <div class="rule"></div>
-          <div class="idx-row" onclick="flipTo(2)"><span class="n">01</span><span class="t">Professional Summary</span></div>
-          <div class="idx-row" onclick="flipTo(3)"><span class="n">02</span><span class="t">Core Skills — Systems &amp; Network</span></div>
-          <div class="idx-row" onclick="flipTo(4)"><span class="n">03</span><span class="t">Core Skills — Support &amp; Ops</span></div>
-          <div class="idx-row" onclick="flipTo(5)"><span class="n">04</span><span class="t">Professional Experience</span></div>
-          <div class="idx-row" onclick="flipTo(6)"><span class="n">05</span><span class="t">Professional Experience (prior Roles)</span></div>
-          <div class="idx-row" onclick="flipTo(7)"><span class="n">06</span><span class="t">Professional Experience (prior Roles - Cont.)</span></div>
-          <div class="idx-row" onclick="flipTo(8)"><span class="n">07</span><span class="t">Education</span></div>
-          <div class="idx-row" onclick="flipTo(9)"><span class="n">08</span><span class="t">Technical Qualifications</span></div>
-          <div class="idx-row" onclick="flipTo(10)"><span class="n">09</span><span class="t">Contacts</span></div>
-          <div class="idx-row" onclick="flipTo(11)"><span class="n">10</span><span class="t">Personal Details</span></div>
+          <div class="idx-row" data-goto="2"><span class="n">01</span><span class="t">Professional Summary</span></div>
+          <div class="idx-row" data-goto="3"><span class="n">02</span><span class="t">Core Skills — Systems &amp; Network</span></div>
+          <div class="idx-row" data-goto="4"><span class="n">03</span><span class="t">Core Skills — Support &amp; Ops</span></div>
+          <div class="idx-row" data-goto="5"><span class="n">04</span><span class="t">Professional Experience — Emdet Engineers</span></div>
+          <div class="idx-row" data-goto="6"><span class="n">05</span><span class="t">Professional Experience — Prior Roles</span></div>
+          <div class="idx-row" data-goto="7"><span class="n">06</span><span class="t">Professional Experience — Prior Roles (Cont.)</span></div>
+          <div class="idx-row" data-goto="8"><span class="n">07</span><span class="t">Education</span></div>
+          <div class="idx-row" data-goto="9"><span class="n">08</span><span class="t">Technical Qualifications</span></div>
+          <div class="idx-row" data-goto="10"><span class="n">09</span><span class="t">Contacts</span></div>
+          <div class="idx-row" data-goto="11"><span class="n">10</span><span class="t">Personal Details</span></div>
         </div>
       </div>
 
@@ -516,12 +623,12 @@
             Capabilities
           </div>
           <h1 class="title">Core Skills — Systems &amp; Network</h1>
-          <div class="rule"></div>
           
           <div class="tag-row">
             <span class="tag">Windows Server</span><span class="tag">Linux</span><span class="tag">OMV / NAS</span>
             <span class="tag">Sophos</span><span class="tag">VMware</span><span class="tag">SAP HANA</span><span class="tag">Intranet</span>
           </div>
+          <div class="rule"></div>
 
           <ul class="list">
             <li><b>Windows Server Management:</b> Administering and configuring Windows Server 2016 &amp; 2012 R2, Active Directory, Wind-chill Remote Access, and Tally Remote Data Services.</li>
@@ -566,8 +673,7 @@
           <h2 class="role">Senior IT Engineer</h2>
           <div class="meta">Emdet Engineers Pvt. Ltd. | Dharuhera, Haryana || Rudrapur, Uttarakhand, March 2018 – Present</div>
           <p class="copy"><b>Company Profile Context:</b> Currently managing core IT operations at Emdet Engineers Pvt. Ltd., including infrastructure integration for Syska Miterr Private Limited — a high-tech joint venture between Syska LED Lights, Emdet Engineers, and Miter &amp; Miter Group. The organization is driven by entrepreneurial technologists specializing in large-scale manufacturing of switchgears, lighting systems, wires, and cables.</p>
-          
-          <p style="font-weight:600; font-family:var(--font-display); margin-top:12px; margin-bottom:6px; color:var(--ink);">Key Professional Responsibilities:</p>
+          <p style="font-weight:600; font-family:var(--font-display); margin-top:10px; margin-bottom:6px; color:var(--ink);">Key Professional Responsibilities:</p>
           <ul class="list">
             <li><b>Multi-Site Infrastructure Integration:</b> Orchestrated and maintained seamless data communication, network synchronization, and systems integrity between the Corporate Headquarters (Gurugram) and Production Unit-1 (Dharuhera HSIIDC).</li>
             <li><b>Enterprise Server Administration:</b> Expertly administered Windows Server 2016 environments, configuring and managing critical enterprise services including Wind-chill Remote Access, Tally Remote Data Services, and automated multi-point data backups.</li>
@@ -588,7 +694,7 @@
             <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             History
           </div>
-          <h1 class="title">Professional Experience (prior Roles)</h1>
+          <h1 class="title">Professional Experience (Prior Roles)</h1>
           <div class="rule"></div>
 
           <h2 class="role">CCE, DMS Client &amp; Server Support</h2>
@@ -609,7 +715,7 @@
             <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             History (Cont.)
           </div>
-          <h1 class="title">Professional Experience (prior Roles)</h1>
+          <h1 class="title">Professional Experience (Prior Roles)</h1>
           <div class="rule"></div>
 
           <h2 class="role">Network / Desktop Support Engineer</h2>
@@ -622,10 +728,10 @@
           </ul>
 
           <h2 class="role">Desktop Support Engineer</h2>
-          <div class="meta">Simple Infosystems Pvt. Ltd. (Noida, Uttar Pradesh), August 2011 – April 2012</div>
+          <div class="meta">Simple Infosystems Pvt. Ltd. | Noida, Uttar Pradesh, August 2011 – April 2012</div>
           <ul class="list">
-            <li>Resolved multi-tier client technical inquiries for desktop hardware and client software.</li>
-            <li>Assisted with computer software deployment, system updates, and logged diagnostic support tokens.</li>
+            <li><b>Multi-tier Support:</b> Resolved multi-tier client technical inquiries for desktop hardware and client software.</li>
+            <li><b>Diagnostics:</b> Assisted with computer software deployment, system updates, and logged diagnostic support tokens.</li>
           </ul>
         </div>
       </div>
@@ -659,43 +765,41 @@
           </div>
           <h1 class="title">Technical Qualifications</h1>
           <div class="rule"></div>
-          <ul class="list">
+          <ul style="padding-left:0;">
             <li class="tech-item">
               <div class="tech-header">
-                <img src="niit_logo.png" alt="NIIT Logo" class="tech-logo" onerror="this.style.display='none'">
+                <img src="niit_logo.png" alt="NIIT" class="tech-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/NIIT_logo.svg/1200px-NIIT_logo.svg.png';">
                 <b>Higher Diploma in System and Networking (Global Net+)</b>
               </div>
               <div class="meta">NIIT, Connaught Place, New Delhi · Nov 2009 – Feb 2012</div>
             </li>
             <li class="tech-item">
               <div class="tech-header">
-                <img src="microsoft_logo.png" alt="Microsoft Logo" class="tech-logo" onerror="this.style.display='none'">
+                <img src="microsoft_logo.png" alt="Microsoft" class="tech-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg';">
                 <b>MCITP (Microsoft Certified IT Professional)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
               </div>
               <ol class="sublist">
-                <li>Windows 7 Configuration: enterprise client deployment &amp; desktop security.</li>
-                <li>Windows Server 2008 Active Directory: identity infrastructures &amp; domain controllers.</li>
-                <li>Windows Server 2008 Network Infrastructure: DNS, DHCP, routing.</li>
-                <li>Server Administrator, Windows Server 2008 R2: provisioning &amp; backup management.</li>
+                <li>Windows 7 Configuration &amp; Server 2008 Active Directory.</li>
+                <li>Windows Server Administrator &amp; Network Infrastructure.</li>
               </ol>
             </li>
             <li class="tech-item">
               <div class="tech-header">
-                <img src="cisco_logo.png" alt="Cisco Logo" class="tech-logo" onerror="this.style.display='none'">
+                <img src="cisco_logo.png" alt="Cisco" class="tech-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg';">
                 <b>CCNA (Cisco Certified Network Associate)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
               </div>
-              <ol class="sublist"><li>Routing and Switching: Cisco routers/switches, VLANs, secure LAN/WAN protocols.</li></ol>
+              <ol class="sublist"><li>Routing &amp; Switching, Cisco routers, VLANs, LAN/WAN protocols.</li></ol>
             </li>
             <li class="tech-item">
               <div class="tech-header">
-                <img src="comptia_logo.png" alt="CompTIA Logo" class="tech-logo" onerror="this.style.display='none'">
+                <img src="comptia_logo.png" alt="CompTIA" class="tech-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/CompTIA_logo.svg/1200px-CompTIA_logo.svg.png';">
                 <b>CompTIA A+ (Systems Specialist)</b> — <span style="font-family:var(--font-mono); font-size:11px;">NIIT, New Delhi</span>
               </div>
               <ol class="sublist"><li>CompTIA A+ Essentials &amp; Practical Application.</li></ol>
             </li>
             <li class="tech-item">
               <div class="tech-header">
-                <img src="tally_logo.png" alt="Tally Logo" class="tech-logo" onerror="this.style.display='none'">
+                <img src="tally_logo.png" alt="Tally" class="tech-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/0/09/Tally_-_Software_logo.png';">
                 <b>Tally 7.2 &amp; Foundation Computer Applications</b>
               </div>
               <div class="meta">Bilingual, Haldwani, Uttarakhand</div>
@@ -716,22 +820,45 @@
 
           <div class="contact-line">
             <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div><b>+91-8585-96-8585</b><span class="sub">Mobile</span></div>
-          </div>
-          <div class="contact-line">
-            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div>
-            <div><b>abhijeetbala@outlook.com</b><span class="sub">Email</span></div>
-          </div>
-          <div class="contact-line">
-            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><b>House No. 724, Sanjay Nagar, Ward No. 11</b><span class="sub">Rudrapur, Udham Singh Nagar, Uttarakhand – 263153, India</span></div>
+            <div><a href="tel:+918585968585"><b>+91-8585-96-8585</b></a><span class="sub">Mobile</span></div>
           </div>
 
-          <div class="rule" style="margin-top:20px;"></div>
-          <div class="tag-row">
-            <span class="tag">LINKEDIN · /1002-abhijeetbala</span>
-            <span class="tag">WHATSAPP · wa.me/qr/I4KLRZECN76OD1</span>
+          <div class="contact-line">
+            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div>
+            <div><a href="mailto:abhijeetbala@outlook.com"><b>abhijeetbala@outlook.com</b></a><span class="sub">Email</span></div>
           </div>
+
+          <div class="contact-line">
+            <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><b>House No. 724, Sanjay Nagar, Ward 11</b><span class="sub">Rudrapur, Udham Singh Nagar, Uttarakhand – 263153, India</span></div>
+          </div>
+
+          <div class="social-grid">
+            <div class="social-col">
+              <a href="https://www.linkedin.com/in/1002-abhijeetbala" target="_blank" class="social-tag-btn">
+                <b>LINKEDIN</b> · Profile
+              </a>
+              <div class="qr-card">
+                <a href="https://www.linkedin.com/in/1002-abhijeetbala" target="_blank">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.linkedin.com/in/1002-abhijeetbala" alt="LinkedIn QR">
+                </a>
+                <span>LINKEDIN QR</span>
+              </div>
+            </div>
+
+            <div class="social-col">
+              <a href="https://wa.me/918585968585" target="_blank" class="social-tag-btn">
+                <b>WHATSAPP</b> · Chat
+              </a>
+              <div class="qr-card">
+                <a href="https://wa.me/918585968585" target="_blank">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/918585968585" alt="WhatsApp QR">
+                </a>
+                <span>WHATSAPP QR</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -747,19 +874,39 @@
           <table class="dt">
             <tr><td style="width:38%;font-weight:600;">Father's Name</td><td>Mr. Gyanendra Bala</td></tr>
             <tr><td style="font-weight:600; vertical-align:top;">Languages Known</td>
-              <td><div class="lang-badges"><span>ENGLISH</span><span>HINDI</span><span>BANGLA</span></div></td>
+              <td>English, Hindi, and Bangla</td>
             </tr>
             <tr><td style="font-weight:600; vertical-align:top;">Permanent Address</td>
               <td>House No. 724, Sanjay Nagar, Ward No. 11, Rudrapur, Udham Singh Nagar, Uttarakhand - 263153, India</td>
             </tr>
           </table>
+
+          <div class="sign-block">
+            <div class="name">Abhijeet Bala</div>
+            <small>Rudrapur, Uttarakhand</small>
+          </div>
+
+          <div class="resume-section">
+            <a href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view" target="_blank" class="download-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              DOWNLOAD RESUME
+            </a>
+            
+            <div class="resume-qr-card">
+              <a href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view" target="_blank">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view" alt="Resume Google Drive QR">
+              </a>
+              <span>Scan to Download<br>PDF Resume</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="page backcover" data-title="Back Cover">
+      <div class="page backcover" data-title="Back Cover" onclick="flipTo(0)">
         <div class="page-inner">
           <div class="monogram" style="width:60px;height:60px;font-size:18px;">AB</div>
-          <div class="open-hint" style="animation:none; opacity:.85;">END OF LOG</div>
+          <div class="open-hint" style="animation:none; opacity:.85;">END OF LOG — REPEAT ⟲</div>
         </div>
         <div class="asset-tag">THANK YOU FOR REVIEWING — ABHIJEET BALA</div>
       </div>
@@ -771,7 +918,7 @@
 
   <div class="controls">
     <div class="nav-btn" id="prevBtn">‹</div>
-    <div class="pageno" id="pageNo">01 / 12</div>
+    <div class="pageno" id="pageNo">01 / 13</div>
     <div class="nav-btn" id="nextBtn">›</div>
   </div>
 </div>
@@ -798,7 +945,6 @@
     if(animating || newIndex===current) return;
     if(newIndex<0) newIndex = pages.length-1;
     if(newIndex>=pages.length) newIndex = 0;
-    if(newIndex===current) return;
     animating = true;
     const dir = (newIndex > current || (current===pages.length-1 && newIndex===0)) ? 'next' : 'prev';
     const oldPage = pages[current];
@@ -833,17 +979,29 @@
     }, 780);
   }
 
-  document.getElementById('prevBtn').addEventListener('click', ()=>flipTo(current-1));
-  document.getElementById('nextBtn').addEventListener('click', ()=>flipTo(current+1));
-  document.getElementById('zoneLeft').addEventListener('click', ()=>flipTo(current-1));
-  document.getElementById('zoneRight').addEventListener('click', ()=>flipTo(current+1));
+  document.getElementById('prevBtn').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current-1); });
+  document.getElementById('nextBtn').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current+1); });
+  document.getElementById('zoneLeft').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current-1); });
+  document.getElementById('zoneRight').addEventListener('click', (e)=>{ e.stopPropagation(); flipTo(current+1); });
 
+  // Index Page Click Handler
+  document.querySelectorAll('.idx-row').forEach(row=>{
+    row.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const pageIndex = parseInt(row.getAttribute('data-goto'), 10);
+      if(!isNaN(pageIndex)) {
+        flipTo(pageIndex);
+      }
+    });
+  });
+
+  // Keyboard navigation
   window.addEventListener('keydown', (e)=>{
     if(e.key === 'ArrowRight') flipTo(current+1);
     if(e.key === 'ArrowLeft') flipTo(current-1);
   });
 
-  // spine rack holes
+  // Spine holes
   const spine = document.getElementById('spine');
   for(let i=0;i<14;i++){
     const h = document.createElement('div');
@@ -854,10 +1012,10 @@
 
   updateUI();
 
-  // smooth entrance
+  // Smooth entrance
   requestAnimationFrame(()=> requestAnimationFrame(()=> document.body.classList.add('ready')));
 
-  // smooth exit before navigating home
+  // Smooth exit
   document.querySelectorAll('.nav-transition').forEach(link=>{
     link.addEventListener('click', function(e){
       e.preventDefault();
