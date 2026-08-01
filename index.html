@@ -1,50 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhijeet Bala</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhijeet Bala — Senior IT Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b1420;
+    --navy-2:#101b28;
+    --led:#14b8a6;
+    --led-soft:#2dd4bf;
+    --paper:#f8fafc;
+    --ink:#111827;
+    --muted:#5b6472;
+    --accent:#f59e0b;
+    --line:#e2e8f0;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Source Serif 4', serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    font-family: var(--font-body);
+    color: var(--ink);
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding: 40px 18px;
+    background: var(--navy);
+    background-image:
+      radial-gradient(ellipse 700px 500px at 20% 0%, rgba(20,184,166,.14), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 85% 100%, rgba(245,158,11,.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 42px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 42px);
+    opacity:0; transform: scale(.98);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  body.ready{ opacity:1; transform:scale(1); }
+  body.leaving{ opacity:0; transform: scale(.98); }
 
-    <link rel="stylesheet" href="styleindex.css">
+  .card{
+    width:100%;
+    max-width: 640px;
+    background: linear-gradient(180deg, #0f1a26, #0c141e);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 18px;
+    padding: 46px 40px 36px;
+    box-shadow: 0 30px 70px -25px rgba(0,0,0,.7);
+    text-align:center;
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+  }
 
+  /* 3D isometric background illustration */
+  .bg3d{
+    position:fixed; inset:0; z-index:0;
+    pointer-events:none; overflow:hidden;
+    perspective: 1600px;
+  }
+  .bg3d .scene{
+    position:absolute;
+    transform-style: preserve-3d;
+    animation: tumble3d 16s ease-in-out infinite;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,.45));
+  }
+  .bg3d .scene.a{ width:300px; top:-40px; right:-50px; opacity:.4; }
+  .bg3d .scene.b{ width:220px; bottom:-40px; left:-40px; opacity:.3; animation-duration:20s; animation-delay:-6s; }
+  @keyframes tumble3d{
+    0%,100%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(0deg) translateY(0); }
+    50%{ transform: rotateX(55deg) rotateZ(45deg) rotateY(14deg) translateY(-16px); }
+  }
+  .bg3d .led-blink{ animation: ledBlink 2.4s ease-in-out infinite; }
+  .bg3d .led-blink.d2{ animation-delay:.6s; }
+  .bg3d .led-blink.d3{ animation-delay:1.2s; }
+  @keyframes ledBlink{ 0%,100%{ opacity:.9; } 50%{ opacity:.25; } }
+  .card::before{
+    content:"";
+    position:absolute; inset:0 0 auto 0; height:3px;
+    background: linear-gradient(90deg, var(--led), var(--accent));
+  }
+
+  .status{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    color: var(--led-soft);
+    background: rgba(20,184,166,.08);
+    border: 1px solid rgba(20,184,166,.25);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 26px;
+  }
+  .status .dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--led-soft);
+    box-shadow: 0 0 0 0 rgba(45,212,191,.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(45,212,191,.55); }
+    70%{ box-shadow: 0 0 0 7px rgba(45,212,191,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(45,212,191,0); }
+  }
+
+  .avatar-ring{
+    width: 128px; height:128px; border-radius:50%;
+    margin: 0 auto 22px;
+    padding: 4px;
+    background: conic-gradient(from 180deg, var(--led), var(--accent), var(--led));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .avatar{
+    width:100%; height:100%; border-radius:50%;
+    background: var(--navy-2);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    font-family: var(--font-display); font-weight:700; font-size:34px;
+    color: var(--led-soft);
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+
+  h1{
+    font-family: var(--font-display); font-weight:700;
+    font-size: clamp(24px, 5vw, 30px);
+    color: #f2f5f8;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .role{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .tagline{
+    font-size: 14.5px;
+    color: #9aa7b5;
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto 28px;
+  }
+  .tagline b{ color:#e7ecf1; font-weight:600; }
+
+  .social-row{
+    display:flex; justify-content:center; gap:14px;
+    margin-bottom: 30px;
+  }
+  .social-row a{
+    width: 42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    color: #b7c1cb;
+    transition: all .25s ease;
+  }
+  .social-row a:hover{
+    background: rgba(20,184,166,.15);
+    border-color: rgba(45,212,191,.4);
+    color: var(--led-soft);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(20,184,166,.2);
+  }
+
+  .cta-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+    margin-bottom: 30px;
+  }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 1px;
+    text-decoration:none;
+    padding: 13px 28px;
+    border-radius: 30px;
+    transition: transform .2s ease, box-shadow .25s ease, background .25s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background: linear-gradient(120deg, var(--led), #0d9488);
+    color: #051512;
+    font-weight:600;
+  }
+  .btn-primary:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(20,184,166,.35);
+  }
+  .btn-ghost{
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(245,158,11,.4);
+  }
+  .btn-ghost:hover{
+    background: rgba(245,158,11,.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(245,158,11,.18);
+  }
+
+  .cert-row{
+    display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .cert-chip{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    color: #9aa7b5;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.09);
+    padding: 6px 12px;
+    border-radius: 6px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .cert-chip img{ height:16px; width:auto; display:block; }
+  .cert-chip .fallback-dot{ width:5px; height:5px; border-radius:50%; background: var(--led-soft); }
+
+  @media (max-width: 480px){
+    .card{ padding: 36px 22px 28px; }
+    .cta-row{ flex-direction: column; align-items:stretch; }
+    .btn{ justify-content:center; }
+  }
+</style>
 </head>
 <body>
-   
-    <div id="mainnav" class="mainnavi">
-        <a href="index.html"> <img src="Profile_pic.jpg"></a>
-        <span id="name"><h1>ABHIJEET BALA</h1></span>
-                <h4>Senior Engineer - IT</h4>
-                    <div id="slogo" class="sociallogo">
-                         <table  class="table1" width="100%">
-                             <tr>
-                                 <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"> <img src="facebook-48.png" alt="facebook"></a></td>
-                                 <td><a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank"> <img src="instagram-48.png" alt="instagram"></a></td>
-                                 <td> <a href="https://www.linkedin.com/in/1002-abhijeetbala?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"> <img src="linkedin-48.png" alt="likedin"></a><br></td>
-                             </tr>
-                         <table class="table2"  width="100%">
-                             <tr>
-                                 <td><a href="mailto:recipient@example.com"><img id="tableimg1" src="hotmail-48.png" alt="email"></a></td>
-                                 <td> <a href="https://wa.me/qr/I4KLRZECN76OD1" target="_blank"> <img id="tableimg2" src="whatsapp.png" alt="whatsapp"></a></td>
-                             </tr>
-                         </table>
-                         </table>
-                    </div>
+
+<div class="bg3d" aria-hidden="true">
+  <svg class="scene a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,20 170,58 100,96 30,58" fill="#1a2a38"/>
+      <polygon points="30,58 100,96 100,150 30,112" fill="#101c26"/>
+      <polygon points="170,58 100,96 100,150 170,112" fill="#0c161f"/>
+      <polygon points="42,66 92,93 92,104 42,77" fill="#14b8a6" opacity=".18"/>
+      <circle class="led-blink" cx="52" cy="72" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d2" cx="52" cy="86" r="3" fill="#2dd4bf"/>
+      <circle class="led-blink d3" cx="52" cy="100" r="3" fill="#f59e0b"/>
+      <polygon points="100,64 158,95 158,106 100,75" fill="#0d1a24"/>
+      <polygon points="100,88 158,119 158,130 100,99" fill="#0d1a24"/>
+    </g>
+  </svg>
+  <svg class="scene b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <polygon points="100,30 160,63 100,96 40,63" fill="#182432"/>
+      <polygon points="40,63 100,96 100,140 40,107" fill="#0f1922"/>
+      <polygon points="160,63 100,96 100,140 160,107" fill="#0b141c"/>
+      <circle class="led-blink" cx="58" cy="78" r="2.6" fill="#f59e0b"/>
+      <circle class="led-blink d2" cx="58" cy="90" r="2.6" fill="#2dd4bf"/>
+      <polygon points="108,72 150,95 150,104 108,81" fill="#101d28"/>
+    </g>
+  </svg>
+</div>
+
+  <div class="card">
+    <div class="status"><span class="dot"></span> ONLINE · 12+ YRS INFRA &amp; NETWORK OPS</div>
+
+    <div class="avatar-ring">
+      <div class="avatar" id="avatar">
+        <img src="Profile_pic.jpg" alt="Abhijeet Bala" onerror="this.remove(); document.getElementById('avatar').textContent='AB';">
+      </div>
     </div>
-    
-    
-    <div class="container">
-        
-        <p> <a href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view?usp=sharing" target="_blank" download="Abhijeet_Bala_Resume"> <img src="intro.png" width="500px" ></a> <br> From Uttarakhand, please click on more <b>button</b> to know more about me<br><br>
-                <button class="frontbutton" role="button"> <a  href="profile.html" >More</a></button> 
-                    <span><button class="frontbutton" role="button"> <a  href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view?usp=sharing" target="_blank" download="Abhijeet_Bala_Resume">Download</a></button><br><br> </p></span>
-        
-        
-        <div>
-            <img src="comptiaA+_logo.png">
-            <img src="mcitp_logo.png">
-            <img src="CCNA_logo.png">
-        </div>
+
+    <h1>ABHIJEET BALA</h1>
+    <div class="role">Senior Engineer — Information Technology</div>
+    <p class="tagline">From <b>Rudrapur, Uttarakhand</b>, keeping enterprise networks, servers and backups running smoothly. Click <b>More</b> to explore the full portfolio, or grab a copy of the resume below.</p>
+
+    <div class="social-row">
+      <a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank" aria-label="Facebook" title="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/ABHIJEETNIIT?mibextid=ZbWKwL" target="_blank" aria-label="Instagram" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/1002-abhijeetbala?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn" title="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg>
+      </a>
+      <a href="mailto:abhijeetbala@outlook.com" aria-label="Email" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+      </a>
+      <a href="https://wa.me/qr/I4KLRZECN76OD1" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.8 7.3L3 20l1.3-5a8.5 8.5 0 1 1 16.7-3.5z"/></svg>
+      </a>
     </div>
-    
+
+    <div class="cta-row">
+      <a class="btn btn-primary nav-transition" href="profile.html">More about me →</a>
+      <a class="btn btn-ghost" href="https://drive.google.com/file/d/1OgUkQ-MbwJ9Hr_6qX30OSD0GJGc02ffc/view?usp=sharing" target="_blank" download="Abhijeet_Bala_Resume">Download Resume ↓</a>
+    </div>
+
+    <div class="cert-row">
+      <span class="cert-chip"><img src="comptiaA+_logo.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback-dot'}))">COMPTIA A+</span>
+      <span class="cert-chip"><img src="mcitp_logo.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback-dot'}))">MCITP</span>
+      <span class="cert-chip"><img src="CCNA_logo.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback-dot'}))">CCNA</span>
+    </div>
+  </div>
+
+<script>
+  requestAnimationFrame(()=> requestAnimationFrame(()=> document.body.classList.add('ready')));
+  document.querySelectorAll('.nav-transition').forEach(link=>{
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      document.body.classList.remove('ready');
+      document.body.classList.add('leaving');
+      setTimeout(()=>{ window.location.href = href; }, 420);
+    });
+  });
+</script>
+
 </body>
 </html>
